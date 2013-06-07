@@ -9,3 +9,5 @@ commands:
     aliases: [ps, song]
   stopsong:
     description: Forces a song to stop
+  makerecord:
+    description: Turns the record being held into a custom one
