@@ -1,11 +1,11 @@
 package no.runsafe.moosic;
 
-import no.runsafe.framework.RunsafePlugin;
+import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.output.IOutput;
 import no.runsafe.moosic.commands.PlaySong;
 import no.runsafe.moosic.commands.StopSong;
 
-public class Plugin extends RunsafePlugin
+public class Plugin extends RunsafeConfigurablePlugin
 {
 	@Override
 	protected void PluginSetup()
