@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class MusicHandler
 {
-	public MusicHandler(IScheduler scheduler, Plugin moosic, IOutput output)
+	public MusicHandler(IScheduler scheduler, Plugin moosic, IOutput output, ITrackPlayerStopped trackStopEvent)
 	{
 		this.scheduler = scheduler;
 		this.path = String.format("plugins/%s/songs/", moosic.getName());
@@ -18,6 +18,8 @@ public class MusicHandler
 		if (!pathDir.exists())
 			if (!pathDir.mkdirs())
 				output.writeColoured("&cUnable to create directories at " + this.path);
+
+		this.trackStopEvent = trackStopEvent;
 	}
 
 	public File loadSongFile(String fileName)
@@ -51,27 +53,35 @@ public class MusicHandler
 	{
 		if (this.trackPlayers.containsKey(playerID))
 		{
-			TrackPlayer trackPlayer = this.trackPlayers.get(playerID);
-			this.scheduler.cancelTask(trackPlayer.getTimerID());
-			this.trackPlayers.remove(playerID);
-
+			this.stopPlayer(playerID);
 			return true;
 		}
 		return false;
+	}
+
+	public boolean playerExists(int playerID)
+	{
+		return this.trackPlayers.containsKey(playerID);
 	}
 
 	public void progressPlayer(int playerID)
 	{
 		TrackPlayer trackPlayer = this.trackPlayers.get(playerID);
 		if (!trackPlayer.playNextTick())
-		{
-			this.scheduler.cancelTask(trackPlayer.getTimerID());
-			this.trackPlayers.remove(playerID);
-		}
+			this.stopPlayer(playerID);
+	}
+
+	private void stopPlayer(int playerID)
+	{
+		TrackPlayer trackPlayer = this.trackPlayers.get(playerID);
+		this.scheduler.cancelTask(trackPlayer.getTimerID());
+		this.trackPlayers.remove(playerID);
+		this.trackStopEvent.onTrackPlayerStopped(playerID);
 	}
 
 	private IScheduler scheduler;
 	private HashMap<Integer, TrackPlayer> trackPlayers = new HashMap<Integer, TrackPlayer>();
 	private int currentTrackPlayerID = 0;
 	private String path;
+	private ITrackPlayerStopped trackStopEvent;
 }
