@@ -35,7 +35,7 @@ public class MusicHandler
 			public void run() {
 				progressPlayer(currentTrackPlayerID);
 			}
-		}, 0, (long) musicTrack.getTempo() / 20);
+		}, 0, (long) musicTrack.getTempo() / 10);
 
 		trackPlayer.setTimerID(timer);
 		this.trackPlayers.put(this.currentTrackPlayerID, trackPlayer);
