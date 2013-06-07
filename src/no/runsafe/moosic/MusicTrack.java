@@ -14,7 +14,7 @@ public class MusicTrack
 		Plugin.output.write("Int: " + data.readInt());
 //		this.length = data.readShort(); // Song length
 		return;
-		Plugin.output.write("Length: " + this.length);
+		/*Plugin.output.write("Length: " + this.length);
 		Plugin.output.write("Layers: " + data.readShort()); // Layers
 		this.songName = readString(data);
 
@@ -50,7 +50,7 @@ public class MusicTrack
 				this.notes.put(tick, new ArrayList<NoteBlockSound>());
 
 			this.notes.get(tick).add(new NoteBlockSound(new NoteBlockInstrument(inst), key));
-		}
+		}*/
 	}
 
 	private String readString(DataInputStream data) throws Exception
