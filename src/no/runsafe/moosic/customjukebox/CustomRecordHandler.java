@@ -17,7 +17,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightClickBlock, ITrackPlayerStopped
+public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightClickBlock
 {
 	public CustomRecordHandler(MusicHandler musicHandler)
 	{
@@ -97,7 +97,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 		return jukebox;
 	}
 
-	@Override
+	//@Override
 	public void onTrackPlayerStopped(int trackPlayerID)
 	{
 		for (CustomJukebox jukebox : this.jukeboxes)
