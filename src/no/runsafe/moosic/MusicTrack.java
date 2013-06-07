@@ -2,6 +2,7 @@ package no.runsafe.moosic;
 
 import java.io.*;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,8 @@ public class MusicTrack
 			bytes.write(stream.readByte());
 
 		ByteBuffer buffer = ByteBuffer.wrap(bytes.toByteArray());
+		buffer.order(ByteOrder.LITTLE_ENDIAN);
+
 		Plugin.output.write("Total bytes: " + buffer.capacity());
 		this.length = buffer.getShort(); // Song length
 		Plugin.output.write("Length: " + this.length);
