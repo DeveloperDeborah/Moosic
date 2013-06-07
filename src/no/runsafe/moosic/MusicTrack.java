@@ -11,7 +11,7 @@ public class MusicTrack
 	{
 		DataInputStream data = new DataInputStream(new BufferedInputStream(new FileInputStream(songFile)));
 
-		Plugin.output.write("Int: " + data.readInt());
+		Plugin.output.write("byte: " + data.readByte());
 //		this.length = data.readShort(); // Song length
 		return;
 		/*Plugin.output.write("Length: " + this.length);
