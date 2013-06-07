@@ -14,8 +14,10 @@ public class MusicHandler
 		this.scheduler = scheduler;
 		this.path = String.format("plugins/%s/songs/", moosic.getName());
 
-		if (!new File(this.path).mkdirs())
-			output.writeColoured("&cUnable to create directories at " + this.path);
+		File pathDir = new File(this.path);
+		if (!pathDir.exists())
+			if (!pathDir.mkdirs())
+				output.writeColoured("&cUnable to create directories at " + this.path);
 	}
 
 	public File loadSongFile(String fileName)
