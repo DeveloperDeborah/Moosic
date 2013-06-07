@@ -12,7 +12,7 @@ public class PlaySong extends PlayerCommand
 {
 	public PlaySong(MusicHandler musicHandler)
 	{
-		super("playsong", "Plays a song at your location.", "runsafe.moosic.play", "song", "volume", "speed");
+		super("playsong", "Plays a song at your location.", "runsafe.moosic.play", "song", "volume");
 		this.musicHandler = musicHandler;
 
 	}
@@ -30,8 +30,7 @@ public class PlaySong extends PlayerCommand
 			int id = this.musicHandler.startSong(
 					new MusicTrack(song),
 					executor.getLocation(),
-					Float.valueOf(parameters.get("volume")),
-					Integer.valueOf(parameters.get("speed"))
+					Float.valueOf(parameters.get("volume"))
 			);
 			return "&2Playing song with player ID: " + id;
 		}

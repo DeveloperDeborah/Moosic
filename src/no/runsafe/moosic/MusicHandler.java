@@ -25,12 +25,12 @@ public class MusicHandler
 		return new File(this.path + fileName);
 	}
 
-	public int startSong(MusicTrack musicTrack, RunsafeLocation location, float volume, int speed)
+	public int startSong(MusicTrack musicTrack, RunsafeLocation location, float volume)
 	{
 		TrackPlayer trackPlayer = new TrackPlayer(location, musicTrack, volume);
 		this.currentTrackPlayerID++;
 
-		double tickDelay = (double) speed / (double) musicTrack.getTempo();
+		double tickDelay = 1.0 / (double) musicTrack.getTempo();
 		tickDelay = tickDelay * 20D;
 		Plugin.output.write("Tick delay: " + tickDelay);
 		long delay = (long) tickDelay;
