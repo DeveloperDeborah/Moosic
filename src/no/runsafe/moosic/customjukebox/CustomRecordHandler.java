@@ -41,10 +41,12 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 			}
 			else
 			{
-				if (usingItem.is(Item.Special.Crafted.WrittenBook))
+				if (usingItem.is(Item.Special.Crafted.EnchantedBook))
 				{
 					if (this.isCustomRecord(usingItem))
 					{
+						player.getInventory().remove(usingItem);
+						player.updateInventory();
 						jukebox = this.playJukebox(player, new CustomJukebox(targetBlock.getLocation(), usingItem));
 						this.jukeboxes.add(jukebox);
 						return false;

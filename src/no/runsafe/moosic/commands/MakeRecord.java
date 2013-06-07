@@ -22,7 +22,7 @@ public class MakeRecord extends PlayerCommand implements IConfigurationChanged
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
-		RunsafeItemStack item = Item.Special.Crafted.WrittenBook.getItem();
+		RunsafeItemStack item = Item.Special.Crafted.EnchantedBook.getItem();
 		item.setAmount(1);
 
 		RunsafeItemMeta meta = item.getItemMeta();
