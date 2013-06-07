@@ -20,5 +20,10 @@ public class Plugin extends RunsafeConfigurablePlugin
 		this.addComponent(StopSong.class);
 	}
 
+	public void trackStop(int playerID)
+	{
+		this.getComponent(CustomRecordHandler.class).onTrackPlayerStopped(playerID);
+	}
+
 	public static IOutput output;
 }

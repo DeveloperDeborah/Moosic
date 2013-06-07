@@ -9,17 +9,16 @@ import java.util.HashMap;
 
 public class MusicHandler
 {
-	public MusicHandler(IScheduler scheduler, Plugin moosic, IOutput output, ITrackPlayerStopped trackStopEvent)
+	public MusicHandler(IScheduler scheduler, Plugin moosic, IOutput output)
 	{
 		this.scheduler = scheduler;
 		this.path = String.format("plugins/%s/songs/", moosic.getName());
+		this.moosic = moosic;
 
 		File pathDir = new File(this.path);
 		if (!pathDir.exists())
 			if (!pathDir.mkdirs())
 				output.writeColoured("&cUnable to create directories at " + this.path);
-
-		this.trackStopEvent = trackStopEvent;
 	}
 
 	public File loadSongFile(String fileName)
@@ -76,12 +75,12 @@ public class MusicHandler
 		TrackPlayer trackPlayer = this.trackPlayers.get(playerID);
 		this.scheduler.cancelTask(trackPlayer.getTimerID());
 		this.trackPlayers.remove(playerID);
-		this.trackStopEvent.onTrackPlayerStopped(playerID);
+		this.moosic.trackStop(playerID);
 	}
 
 	private IScheduler scheduler;
 	private HashMap<Integer, TrackPlayer> trackPlayers = new HashMap<Integer, TrackPlayer>();
 	private int currentTrackPlayerID = 0;
 	private String path;
-	private ITrackPlayerStopped trackStopEvent;
+	private Plugin moosic;
 }

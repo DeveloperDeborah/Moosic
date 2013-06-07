@@ -9,7 +9,6 @@ import no.runsafe.framework.server.block.RunsafeBlock;
 import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
-import no.runsafe.moosic.ITrackPlayerStopped;
 import no.runsafe.moosic.MusicHandler;
 import no.runsafe.moosic.MusicTrack;
 
@@ -97,7 +96,6 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 		return jukebox;
 	}
 
-	//@Override
 	public void onTrackPlayerStopped(int trackPlayerID)
 	{
 		for (CustomJukebox jukebox : this.jukeboxes)
