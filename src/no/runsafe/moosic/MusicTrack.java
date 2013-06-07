@@ -11,7 +11,9 @@ public class MusicTrack
 	{
 		DataInputStream data = new DataInputStream(new BufferedInputStream(new FileInputStream(songFile)));
 
-		this.length = data.readShort(); // Song length
+		Plugin.output.write("Int: " + data.readInt());
+//		this.length = data.readShort(); // Song length
+		return;
 		Plugin.output.write("Length: " + this.length);
 		Plugin.output.write("Layers: " + data.readShort()); // Layers
 		this.songName = readString(data);
