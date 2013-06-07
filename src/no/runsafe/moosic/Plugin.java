@@ -5,7 +5,7 @@ import no.runsafe.framework.output.IOutput;
 import no.runsafe.moosic.commands.PlaySong;
 import no.runsafe.moosic.commands.StopSong;
 import no.runsafe.moosic.customjukebox.CustomRecordHandler;
-import no.runsafe.moosic.customjukebox.MakeRecord;
+import no.runsafe.moosic.commands.MakeRecord;
 
 public class Plugin extends RunsafeConfigurablePlugin
 {

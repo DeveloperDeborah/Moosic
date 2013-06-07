@@ -1,4 +1,4 @@
-package no.runsafe.moosic.customjukebox;
+package no.runsafe.moosic.commands;
 
 import no.runsafe.framework.command.player.PlayerCommand;
 import no.runsafe.framework.configuration.IConfiguration;
@@ -7,6 +7,7 @@ import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,6 +25,9 @@ public class MakeRecord extends PlayerCommand implements IConfigurationChanged
 		RunsafeItemMeta meta = item.getItemMeta();
 
 		List<String> lore = meta.getLore();
+		if (lore == null)
+			lore = new ArrayList<String>();
+
 		lore.set(0, parameters.get("song"));
 		meta.setLore(lore);
 		meta.setDisplayName(this.customRecordName);
