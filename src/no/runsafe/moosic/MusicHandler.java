@@ -31,6 +31,7 @@ public class MusicHandler
 		this.currentTrackPlayerID++;
 
 		long delay = (long) ((float) (speed / musicTrack.getTempo()) * 20);
+		Plugin.output.write("Delay: " + delay);
 		int timer = this.scheduler.startSyncRepeatingTask(new Runnable() {
 			@Override
 			public void run() {
