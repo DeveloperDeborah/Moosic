@@ -2,6 +2,7 @@ package no.runsafe.moosic.customjukebox;
 
 import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.event.IConfigurationChanged;
+import no.runsafe.framework.event.IPluginEnabled;
 import no.runsafe.framework.event.block.IBlockBreakEvent;
 import no.runsafe.framework.event.player.IPlayerRightClickBlock;
 import no.runsafe.framework.minecraft.Item;
@@ -18,11 +19,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightClickBlock, IBlockBreakEvent
+public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightClickBlock, IBlockBreakEvent, IPluginEnabled
 {
-	public CustomRecordHandler(MusicHandler musicHandler)
+	public CustomRecordHandler(MusicHandler musicHandler, CustomJukeboxRepository repository)
 	{
 		this.musicHandler = musicHandler;
+		this.repository = repository;
 	}
 
 	@Override
@@ -36,9 +38,10 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 	@Override
 	public boolean OnPlayerRightClick(RunsafePlayer player, RunsafeItemStack usingItem, RunsafeBlock targetBlock)
 	{
+		RunsafeLocation blockLocation = targetBlock.getLocation();
 		if (targetBlock.is(Item.Decoration.Jukebox))
 		{
-			CustomJukebox jukebox = this.getJukeboxAtLocation(targetBlock.getLocation());
+			CustomJukebox jukebox = this.getJukeboxAtLocation(blockLocation);
 			if (jukebox != null)
 			{
 				this.stopJukebox(jukebox);
@@ -52,7 +55,8 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 					{
 						player.getInventory().remove(usingItem);
 						player.updateInventory();
-						jukebox = this.playJukebox(player, new CustomJukebox(targetBlock.getLocation(), usingItem));
+						jukebox = this.playJukebox(player, new CustomJukebox(blockLocation, usingItem));
+						this.repository.storeJukebox(blockLocation, usingItem);
 						this.jukeboxes.add(jukebox);
 						return false;
 					}
@@ -60,6 +64,14 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void OnPluginEnabled()
+	{
+		// Restore any active jukeboxes from the DB.
+		for (CustomJukebox jukebox : this.repository.getJukeboxes())
+			this.jukeboxes.add(jukebox);
 	}
 
 	private void stopJukebox(CustomJukebox jukebox)
@@ -70,6 +82,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 
 		jukebox.ejectRecord();
 		this.jukeboxes.remove(jukebox);
+		this.repository.deleteJukeboxes(jukebox.getLocation());
 	}
 
 	private boolean isCustomRecord(RunsafeItemStack item)
@@ -135,4 +148,5 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 	private List<CustomJukebox> jukeboxes = new ArrayList<CustomJukebox>();
 	private String customRecordName;
 	private MusicHandler musicHandler;
+	private CustomJukeboxRepository repository;
 }
