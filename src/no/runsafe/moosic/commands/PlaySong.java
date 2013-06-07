@@ -5,7 +5,7 @@ import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.moosic.MusicHandler;
 import no.runsafe.moosic.MusicTrack;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.HashMap;
 
 public class PlaySong extends PlayerCommand
@@ -20,9 +20,10 @@ public class PlaySong extends PlayerCommand
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
-		File song = this.musicHandler.loadSongFile(parameters.get("song"));
+		//File song = this.musicHandler.loadSongFile(parameters.get("song"));
+		Path song = this.musicHandler.loadSongFile(parameters.get("song"));
 
-		if (!song.exists())
+		if (!song.toFile().exists())
 			return "&cThat song does not exist.";
 
 		try

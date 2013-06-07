@@ -1,32 +1,17 @@
 package no.runsafe.moosic;
 
-import java.io.*;
 import java.nio.ByteBuffer;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class MusicTrack
 {
-	public MusicTrack(File songFile) throws Exception
+	public MusicTrack(Path songFile) throws Exception
 	{
-		// TODO: This seems overly complicated, make this better.
-		DataInputStream data = new DataInputStream(new BufferedInputStream(new FileInputStream(songFile)));
-		List<Byte> byteArray = new ArrayList<Byte>();
-
-		while (data.available() > 0)
-			byteArray.add(data.readByte());
-
-		byte[] bytes = new byte[byteArray.size()];
-
-		int index = 0;
-		for (byte nom : byteArray)
-		{
-			bytes[index] = nom;
-			index++;
-		}
-
-		ByteBuffer buffer = ByteBuffer.wrap(bytes);
+		ByteBuffer buffer = ByteBuffer.wrap(Files.readAllBytes(songFile));
 
 		this.length = buffer.getShort(); // Song length
 		Plugin.output.write("Length: " + this.length);
