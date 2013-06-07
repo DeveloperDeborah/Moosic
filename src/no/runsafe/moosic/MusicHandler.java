@@ -28,7 +28,7 @@ public class MusicHandler
 	public int startSong(MusicTrack musicTrack, RunsafeLocation location, float volume)
 	{
 		TrackPlayer trackPlayer = new TrackPlayer(location, musicTrack, volume);
-		this.currentTrackPlayerID++;
+		final int newID = this.currentTrackPlayerID + 1;
 
 		double tickDelay = 1.0 / (double) musicTrack.getTempo();
 		tickDelay = tickDelay * 20D;
@@ -36,13 +36,14 @@ public class MusicHandler
 		int timer = this.scheduler.startSyncRepeatingTask(new Runnable() {
 			@Override
 			public void run() {
-				progressPlayer(currentTrackPlayerID);
+				progressPlayer(newID);
 			}
 		}, delay, delay);
 
 		trackPlayer.setTimerID(timer);
-		this.trackPlayers.put(this.currentTrackPlayerID, trackPlayer);
+		this.trackPlayers.put(newID, trackPlayer);
 
+		this.currentTrackPlayerID = newID;
 		return currentTrackPlayerID;
 	}
 
