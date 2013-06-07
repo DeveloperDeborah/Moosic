@@ -28,7 +28,13 @@ public class MakeRecord extends PlayerCommand implements IConfigurationChanged
 		if (lore == null)
 			lore = new ArrayList<String>();
 
-		lore.set(0, parameters.get("song"));
+		String song = parameters.get("song");
+
+		if (lore.size() > 0)
+			lore.set(0, song);
+		else
+			lore.add(song);
+
 		meta.setLore(lore);
 		meta.setDisplayName(this.customRecordName);
 		item.setItemMeta(meta);
