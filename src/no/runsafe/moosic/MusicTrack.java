@@ -51,13 +51,21 @@ public class MusicTrack
 				break;
 
 			tick += jumps;
-			byte inst = buffer.get();
-			byte key = buffer.get();
 
-			if (!this.notes.containsKey(tick))
-				this.notes.put(tick, new ArrayList<NoteBlockSound>());
+			while (true)
+			{
+				jumps = buffer.getShort();
+				if (jumps == 0)
+					break;
 
-			this.notes.get(tick).add(new NoteBlockSound(new NoteBlockInstrument(inst), key));
+				byte inst = buffer.get();
+				byte key = buffer.get();
+
+				if (!this.notes.containsKey(tick))
+					this.notes.put(tick, new ArrayList<NoteBlockSound>());
+
+				this.notes.get(tick).add(new NoteBlockSound(new NoteBlockInstrument(inst), key));
+			}
 		}
 	}
 
