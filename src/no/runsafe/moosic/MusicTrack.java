@@ -17,7 +17,7 @@ public class MusicTrack
 			bytes.write(stream.readByte());
 
 		ByteBuffer buffer = ByteBuffer.wrap(bytes.toByteArray());
-
+		Plugin.output.write("Total bytes: " + buffer.capacity());
 		this.length = buffer.getShort(); // Song length
 		Plugin.output.write("Length: " + this.length);
 		buffer.getShort(); // Layers
