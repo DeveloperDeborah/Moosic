@@ -1,7 +1,6 @@
 package no.runsafe.moosic.commands;
 
 import no.runsafe.framework.command.player.PlayerCommand;
-import no.runsafe.framework.output.IOutput;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.moosic.MusicHandler;
 import no.runsafe.moosic.MusicTrack;
@@ -11,11 +10,11 @@ import java.util.HashMap;
 
 public class PlaySong extends PlayerCommand
 {
-	public PlaySong(MusicHandler musicHandler, IOutput output)
+	public PlaySong(MusicHandler musicHandler)
 	{
 		super("playsong", "Plays a song at your location.", "runsafe.moosic.play", "song", "volume");
 		this.musicHandler = musicHandler;
-		this.output = output;
+
 	}
 
 	@Override
@@ -39,5 +38,4 @@ public class PlaySong extends PlayerCommand
 	}
 
 	private MusicHandler musicHandler;
-	private IOutput output;
 }
