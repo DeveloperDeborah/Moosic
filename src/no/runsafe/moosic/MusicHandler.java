@@ -25,12 +25,12 @@ public class MusicHandler
 		return new File(this.path + fileName);
 	}
 
-	public int startSong(MusicTrack musicTrack, RunsafeLocation location, float volume)
+	public int startSong(MusicTrack musicTrack, RunsafeLocation location, float volume, int speed)
 	{
 		TrackPlayer trackPlayer = new TrackPlayer(location, musicTrack, volume);
 		this.currentTrackPlayerID++;
 
-		int delay = 8 / musicTrack.getTempo();
+		int delay = speed / musicTrack.getTempo();
 		int timer = this.scheduler.startSyncRepeatingTask(new Runnable() {
 			@Override
 			public void run() {
