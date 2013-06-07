@@ -1,10 +1,11 @@
 name: Moosic
 main: no.runsafe.moosic.Plugin
 version: 1.0.@BUILD@
-authors: []
-depend: []
-description:
+author: Kruithne
+description: Customized music plug-in
 commands:
-  something:
-    description:
-    aliases: []
+  playsong:
+    description: Plays a song at your location
+    aliases: [ps, song]
+  stopsong:
+    description: Forces a song to stop
