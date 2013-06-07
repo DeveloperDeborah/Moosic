@@ -30,7 +30,7 @@ public class MusicHandler
 		TrackPlayer trackPlayer = new TrackPlayer(location, musicTrack, volume);
 		this.currentTrackPlayerID++;
 
-		double tickDelay = speed / musicTrack.getTempo();
+		double tickDelay = (double) speed / (double) musicTrack.getTempo();
 		Plugin.output.write("Tick delay: " + tickDelay);
 		long delay = (long) tickDelay * 20;
 		Plugin.output.write("Delay: " + delay);
