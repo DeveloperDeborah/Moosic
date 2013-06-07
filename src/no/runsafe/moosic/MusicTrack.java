@@ -31,6 +31,7 @@ public class MusicTrack
 		readString(buffer); // Original song author
 		readString(buffer); // Description
 		this.tempo = buffer.getShort() / 100;
+		Plugin.output.write("Tempo: " + this.tempo);
 		buffer.get(); // Auto-save
 		buffer.get(); // Auto-save duration
 		buffer.get(); // Time sig
