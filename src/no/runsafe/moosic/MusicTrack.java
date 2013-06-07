@@ -1,7 +1,5 @@
 package no.runsafe.moosic;
 
-import no.runsafe.framework.server.RunsafeLocation;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +12,8 @@ public class MusicTrack
 		DataInputStream data = new DataInputStream(new BufferedInputStream(new FileInputStream(songFile)));
 
 		this.length = data.readShort(); // Song length
-		data.readShort(); // Layers
+		Plugin.output.write("Length: " + this.length);
+		Plugin.output.write("Layers: " + data.readShort()); // Layers
 		this.songName = readString(data);
 
 		// We pull this data but have no need for it.
