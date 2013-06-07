@@ -41,7 +41,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 			}
 			else
 			{
-				if (usingItem.is(Item.Miscellaneous.FireworkCharge))
+				if (usingItem.is(Item.Special.Crafted.WrittenBook))
 				{
 					if (this.isCustomRecord(usingItem))
 					{

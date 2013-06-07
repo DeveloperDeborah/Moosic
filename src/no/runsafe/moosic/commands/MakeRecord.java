@@ -22,15 +22,15 @@ public class MakeRecord extends PlayerCommand implements IConfigurationChanged
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
-		RunsafeItemStack item = Item.Miscellaneous.FireworkCharge.getItem();
+		RunsafeItemStack item = Item.Special.Crafted.WrittenBook.getItem();
 		item.setAmount(1);
 
 		RunsafeItemMeta meta = item.getItemMeta();
 		List<String> lore = new ArrayList<String>();
 		lore.add(parameters.get("song"));
 		meta.setLore(lore);
-		item.setItemMeta(meta);
 		meta.setDisplayName(this.customRecordName);
+		item.setItemMeta(meta);
 
 		executor.getInventory().addItems(item);
 		return "&2Success!";
