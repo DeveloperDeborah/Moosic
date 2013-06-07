@@ -49,16 +49,19 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 			}
 			else
 			{
-				if (usingItem.is(Item.Special.Crafted.EnchantedBook))
+				if (usingItem != null)
 				{
-					if (this.isCustomRecord(usingItem))
+					if (usingItem.is(Item.Special.Crafted.EnchantedBook))
 					{
-						player.getInventory().remove(usingItem);
-						player.updateInventory();
-						jukebox = this.playJukebox(player, new CustomJukebox(blockLocation, usingItem));
-						this.repository.storeJukebox(blockLocation, usingItem);
-						this.jukeboxes.add(jukebox);
-						return false;
+						if (this.isCustomRecord(usingItem))
+						{
+							player.getInventory().remove(usingItem);
+							player.updateInventory();
+							jukebox = this.playJukebox(player, new CustomJukebox(blockLocation, usingItem));
+							this.repository.storeJukebox(blockLocation, usingItem);
+							this.jukeboxes.add(jukebox);
+							return false;
+						}
 					}
 				}
 			}
