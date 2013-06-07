@@ -30,7 +30,7 @@ public class MusicHandler
 		TrackPlayer trackPlayer = new TrackPlayer(location, musicTrack, volume);
 		this.currentTrackPlayerID++;
 
-		int delay = 1 / musicTrack.getTempo();
+		int delay = 2 / musicTrack.getTempo();
 		int timer = this.scheduler.startSyncRepeatingTask(new Runnable() {
 			@Override
 			public void run() {
