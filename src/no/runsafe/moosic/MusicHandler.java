@@ -32,9 +32,7 @@ public class MusicHandler
 
 		double tickDelay = 1.0 / (double) musicTrack.getTempo();
 		tickDelay = tickDelay * 20D;
-		Plugin.output.write("Tick delay: " + tickDelay);
 		long delay = (long) tickDelay;
-		Plugin.output.write("Delay: " + delay);
 		int timer = this.scheduler.startSyncRepeatingTask(new Runnable() {
 			@Override
 			public void run() {
