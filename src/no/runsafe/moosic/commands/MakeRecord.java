@@ -3,6 +3,7 @@ package no.runsafe.moosic.commands;
 import no.runsafe.framework.command.player.PlayerCommand;
 import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.event.IConfigurationChanged;
+import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
@@ -21,23 +22,17 @@ public class MakeRecord extends PlayerCommand implements IConfigurationChanged
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
-		RunsafeItemStack item = executor.getItemInHand();
+		RunsafeItemStack item = Item.Miscellaneous.FireworkCharge.getItem();
+		item.setAmount(1);
+
 		RunsafeItemMeta meta = item.getItemMeta();
-
-		List<String> lore = meta.getLore();
-		if (lore == null)
-			lore = new ArrayList<String>();
-
-		String song = parameters.get("song");
-
-		if (lore.size() > 0)
-			lore.set(0, song);
-		else
-			lore.add(song);
-
+		List<String> lore = new ArrayList<String>();
+		lore.add(parameters.get("song"));
 		meta.setLore(lore);
-		meta.setDisplayName(this.customRecordName);
 		item.setItemMeta(meta);
+		meta.setDisplayName(this.customRecordName);
+
+		executor.getInventory().addItems(item);
 		return "&2Success!";
 	}
 

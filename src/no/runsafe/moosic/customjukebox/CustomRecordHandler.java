@@ -41,7 +41,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 			}
 			else
 			{
-				if (CustomRecordHandler.recordItems.contains(usingItem.getItemType()))
+				if (usingItem.is(Item.Miscellaneous.FireworkCharge))
 				{
 					if (this.isCustomRecord(usingItem))
 					{
@@ -119,19 +119,4 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 	private String customRecordName;
 	private MusicHandler musicHandler;
 
-	private static List<Item> recordItems = new ArrayList<Item>();
-	static
-	{
-		recordItems.add(Item.Miscellaneous.Record.C418_11);
-		recordItems.add(Item.Miscellaneous.Record.C418_13);
-		recordItems.add(Item.Miscellaneous.Record.C418_Blocks);
-		recordItems.add(Item.Miscellaneous.Record.C418_Chirp);
-		recordItems.add(Item.Miscellaneous.Record.C418_Far);
-		recordItems.add(Item.Miscellaneous.Record.C418_Mall);
-		recordItems.add(Item.Miscellaneous.Record.C418_Mellohi);
-		recordItems.add(Item.Miscellaneous.Record.C418_Stal);
-		recordItems.add(Item.Miscellaneous.Record.C418_Strad);
-		recordItems.add(Item.Miscellaneous.Record.C418_Wait);
-		recordItems.add(Item.Miscellaneous.Record.C418_Ward);
-	}
 }
