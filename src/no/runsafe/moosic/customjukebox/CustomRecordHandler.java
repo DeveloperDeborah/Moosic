@@ -2,10 +2,12 @@ package no.runsafe.moosic.customjukebox;
 
 import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.event.IConfigurationChanged;
+import no.runsafe.framework.event.block.IBlockBreakEvent;
 import no.runsafe.framework.event.player.IPlayerRightClickBlock;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.server.RunsafeLocation;
 import no.runsafe.framework.server.block.RunsafeBlock;
+import no.runsafe.framework.server.event.block.RunsafeBlockBreakEvent;
 import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
@@ -16,11 +18,19 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightClickBlock
+public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightClickBlock, IBlockBreakEvent
 {
 	public CustomRecordHandler(MusicHandler musicHandler)
 	{
 		this.musicHandler = musicHandler;
+	}
+
+	@Override
+	public void OnBlockBreakEvent(RunsafeBlockBreakEvent event)
+	{
+		CustomJukebox jukebox = this.getJukeboxAtLocation(event.getBlock().getLocation());
+		if (jukebox != null)
+			this.stopJukebox(jukebox);
 	}
 
 	@Override
@@ -31,12 +41,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 			CustomJukebox jukebox = this.getJukeboxAtLocation(targetBlock.getLocation());
 			if (jukebox != null)
 			{
-				int playerID = jukebox.getPlayerID();
-				if (this.musicHandler.playerExists(playerID))
-					this.musicHandler.forceStop(playerID);
-
-				jukebox.ejectRecord();
-				this.jukeboxes.remove(jukebox);
+				this.stopJukebox(jukebox);
 				return false;
 			}
 			else
@@ -55,6 +60,16 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 			}
 		}
 		return true;
+	}
+
+	private void stopJukebox(CustomJukebox jukebox)
+	{
+		int playerID = jukebox.getPlayerID();
+		if (this.musicHandler.playerExists(playerID))
+			this.musicHandler.forceStop(playerID);
+
+		jukebox.ejectRecord();
+		this.jukeboxes.remove(jukebox);
 	}
 
 	private boolean isCustomRecord(RunsafeItemStack item)
@@ -120,5 +135,4 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 	private List<CustomJukebox> jukeboxes = new ArrayList<CustomJukebox>();
 	private String customRecordName;
 	private MusicHandler musicHandler;
-
 }
