@@ -5,8 +5,6 @@ import no.runsafe.framework.server.RunsafeLocation;
 import no.runsafe.framework.timer.IScheduler;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 
 public class MusicHandler
@@ -22,9 +20,9 @@ public class MusicHandler
 				output.writeColoured("&cUnable to create directories at " + this.path);
 	}
 
-	public Path loadSongFile(String fileName)
+	public File loadSongFile(String fileName)
 	{
-		return Paths.get(this.path + fileName);
+		return new File(this.path + fileName);
 	}
 
 	public int startSong(MusicTrack musicTrack, RunsafeLocation location, float volume)
