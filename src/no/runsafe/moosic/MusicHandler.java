@@ -1,5 +1,6 @@
 package no.runsafe.moosic;
 
+import no.runsafe.framework.output.IOutput;
 import no.runsafe.framework.server.RunsafeLocation;
 import no.runsafe.framework.timer.IScheduler;
 
@@ -8,10 +9,13 @@ import java.util.HashMap;
 
 public class MusicHandler
 {
-	public MusicHandler(IScheduler scheduler, Plugin moosic)
+	public MusicHandler(IScheduler scheduler, Plugin moosic, IOutput output)
 	{
 		this.scheduler = scheduler;
 		this.path = String.format("plugins/%s/songs/", moosic.getName());
+
+		if (!new File(this.path).mkdirs())
+			output.writeColoured("&cUnable to create directories at " + this.path);
 	}
 
 	public File loadSongFile(String fileName)
