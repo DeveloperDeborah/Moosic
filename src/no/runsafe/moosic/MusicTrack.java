@@ -11,7 +11,7 @@ public class MusicTrack
 {
 	public MusicTrack(File songFile) throws Exception
 	{
-		DataInputStream stream = new DataInputStream(new FileInputStream(songFile));
+		DataInputStream stream = new DataInputStream(new BufferedInputStream(new FileInputStream(songFile)));
 		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 
 		while (stream.available() > 0)
