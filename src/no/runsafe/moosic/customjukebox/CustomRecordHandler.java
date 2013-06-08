@@ -97,8 +97,9 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 	public CustomJukebox getJukeboxAtLocation(RunsafeLocation location)
 	{
 		for (CustomJukebox jukebox : this.jukeboxes)
-			if (jukebox.getLocation().distance(location) < 1)
-				return jukebox;
+			if (jukebox.getLocation().getWorld().getName().equals(location.getWorld().getName()))
+				if (jukebox.getLocation().distance(location) < 1)
+					return jukebox;
 
 		return null;
 	}
