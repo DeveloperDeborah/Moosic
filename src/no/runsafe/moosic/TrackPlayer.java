@@ -37,9 +37,9 @@ public class TrackPlayer
 		this.timerID = timerID;
 	}
 
-	private RunsafeLocation location;
-	private float volume;
+	private final RunsafeLocation location;
+	private final float volume;
 	private short currentTick = -1;
 	private int timerID = -1;
-	private MusicTrack musicTrack;
+	private final MusicTrack musicTrack;
 }

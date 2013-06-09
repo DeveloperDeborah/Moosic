@@ -16,6 +16,6 @@ public class NoteBlockSound
 		location.getWorld().playSound(location, this.instrument.getSound(), volume, pitch);
 	}
 
-	private NoteBlockInstrument instrument;
-	private byte key;
+	private final NoteBlockInstrument instrument;
+	private final byte key;
 }

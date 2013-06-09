@@ -41,5 +41,5 @@ public class PlaySong extends PlayerCommand
 		}
 	}
 
-	private MusicHandler musicHandler;
+	private final MusicHandler musicHandler;
 }

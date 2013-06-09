@@ -94,5 +94,5 @@ public class CustomJukeboxRepository extends Repository
 		return versions;
 	}
 
-	private IDatabase database;
+	private final IDatabase database;
 }

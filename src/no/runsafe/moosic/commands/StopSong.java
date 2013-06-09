@@ -24,5 +24,5 @@ public class StopSong extends ExecutableCommand
 		return "&cCannot stop song. No player found with ID " + playerID;
 	}
 
-	private MusicHandler musicHandler;
+	private final MusicHandler musicHandler;
 }

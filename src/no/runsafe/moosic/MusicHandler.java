@@ -78,9 +78,9 @@ public class MusicHandler
 		this.moosic.trackStop(playerID);
 	}
 
-	private IScheduler scheduler;
-	private HashMap<Integer, TrackPlayer> trackPlayers = new HashMap<Integer, TrackPlayer>();
+	private final IScheduler scheduler;
+	private final HashMap<Integer, TrackPlayer> trackPlayers = new HashMap<Integer, TrackPlayer>();
 	private int currentTrackPlayerID = 0;
-	private String path;
-	private Plugin moosic;
+	private final String path;
+	private final Plugin moosic;
 }

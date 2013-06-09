@@ -67,7 +67,7 @@ public class MusicTrack
 		}
 	}
 
-	private String readString(ByteBuffer buffer) throws Exception
+	private String readString(ByteBuffer buffer)
 	{
 		StringBuilder string = new StringBuilder();
 		int stringLength = buffer.getInt();
@@ -104,5 +104,5 @@ public class MusicTrack
 	private String songName;
 	private int tempo;
 	private short length;
-	private HashMap<Short, List<NoteBlockSound>> notes = new HashMap<Short, List<NoteBlockSound>>();
+	private final HashMap<Short, List<NoteBlockSound>> notes = new HashMap<Short, List<NoteBlockSound>>();
 }

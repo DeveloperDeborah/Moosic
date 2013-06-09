@@ -17,8 +17,8 @@ public class NoteBlockInstrument
 		return NoteBlockInstrument.sounds.get(this.soundID);
 	}
 
-	private int soundID;
-	private static List<Sound> sounds = new ArrayList<Sound>();
+	private final int soundID;
+	private static final List<Sound> sounds = new ArrayList<Sound>();
 	static
 	{
 		sounds.add(Sound.Note.Piano);
