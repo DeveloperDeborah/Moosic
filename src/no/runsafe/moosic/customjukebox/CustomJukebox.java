@@ -1,13 +1,13 @@
 package no.runsafe.moosic.customjukebox;
 
 import no.runsafe.framework.server.RunsafeLocation;
-import no.runsafe.framework.server.item.RunsafeItemStack;
+import no.runsafe.framework.server.item.meta.RunsafeMeta;
 
 import java.util.List;
 
 public class CustomJukebox
 {
-	public CustomJukebox(RunsafeLocation location, RunsafeItemStack item)
+	public CustomJukebox(RunsafeLocation location, RunsafeMeta item)
 	{
 		this.location = location;
 		this.item = item;
@@ -44,6 +44,6 @@ public class CustomJukebox
 	}
 
 	private final RunsafeLocation location;
-	private final RunsafeItemStack item;
+	private final RunsafeMeta item;
 	private int playerID;
 }

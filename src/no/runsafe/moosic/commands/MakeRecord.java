@@ -5,6 +5,7 @@ import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.event.IConfigurationChanged;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.server.item.RunsafeItemStack;
+import no.runsafe.framework.server.item.meta.RunsafeMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 
 import java.util.HashMap;
@@ -20,7 +21,7 @@ public class MakeRecord extends PlayerCommand implements IConfigurationChanged
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
-		RunsafeItemStack item = Item.Special.Crafted.EnchantedBook.getItem();
+		RunsafeMeta item = (RunsafeMeta)Item.Special.Crafted.EnchantedBook.getItem();
 		item.setAmount(1);
 		item.addLore(parameters.get("song")).setDisplayName(customRecordName);
 		executor.getInventory().addItems(item);

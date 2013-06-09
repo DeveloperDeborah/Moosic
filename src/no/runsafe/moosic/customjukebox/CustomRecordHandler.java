@@ -10,6 +10,7 @@ import no.runsafe.framework.server.RunsafeLocation;
 import no.runsafe.framework.server.block.RunsafeBlock;
 import no.runsafe.framework.server.event.block.RunsafeBlockBreakEvent;
 import no.runsafe.framework.server.item.RunsafeItemStack;
+import no.runsafe.framework.server.item.meta.RunsafeMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.moosic.MusicHandler;
 import no.runsafe.moosic.MusicTrack;
@@ -56,7 +57,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 						{
 							player.getInventory().remove(usingItem);
 							player.updateInventory();
-							jukebox = this.playJukebox(player, new CustomJukebox(blockLocation, usingItem));
+							jukebox = this.playJukebox(player, new CustomJukebox(blockLocation, (RunsafeMeta) usingItem));
 							this.repository.storeJukebox(blockLocation, usingItem);
 							this.jukeboxes.add(jukebox);
 							return false;
@@ -89,7 +90,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 
 	private boolean isCustomRecord(RunsafeItemStack item)
 	{
-		return item.getDisplayName().equalsIgnoreCase(this.customRecordName);
+		return item instanceof RunsafeMeta && ((RunsafeMeta)item).getDisplayName().equalsIgnoreCase(this.customRecordName);
 	}
 
 	public CustomJukebox getJukeboxAtLocation(RunsafeLocation location)

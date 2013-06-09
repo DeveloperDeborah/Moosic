@@ -8,6 +8,7 @@ import no.runsafe.framework.server.RunsafeWorld;
 import no.runsafe.framework.server.inventory.RunsafeInventory;
 import no.runsafe.framework.server.inventory.RunsafeInventoryType;
 import no.runsafe.framework.server.item.RunsafeItemStack;
+import no.runsafe.framework.server.item.meta.RunsafeMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,23 +34,23 @@ public class CustomJukeboxRepository extends Repository
 		holder.addItems(item);
 
 		this.database.Execute(
-				"INSERT INTO `moosic_jukeboxes` (world, x, y, z, item) VALUES(?, ?, ?, ?, ?)",
-				location.getWorld().getName(),
-				location.getBlockX(),
-				location.getBlockY(),
-				location.getBlockZ(),
-				holder.serialize()
+			"INSERT INTO `moosic_jukeboxes` (world, x, y, z, item) VALUES(?, ?, ?, ?, ?)",
+			location.getWorld().getName(),
+			location.getBlockX(),
+			location.getBlockY(),
+			location.getBlockZ(),
+			holder.serialize()
 		);
 	}
 
 	public void deleteJukeboxes(RunsafeLocation location)
 	{
 		this.database.Execute(
-				"DELETE FROM `moosic_jukeboxes` WHERE world = ? AND x = ? AND y = ? AND z = ?",
-				location.getWorld().getName(),
-				location.getBlockX(),
-				location.getBlockY(),
-				location.getBlockZ()
+			"DELETE FROM `moosic_jukeboxes` WHERE world = ? AND x = ? AND y = ? AND z = ?",
+			location.getWorld().getName(),
+			location.getBlockX(),
+			location.getBlockY(),
+			location.getBlockZ()
 		);
 	}
 
@@ -69,7 +70,7 @@ public class CustomJukeboxRepository extends Repository
 					RunsafeInventory holder = RunsafeServer.Instance.createInventory(null, RunsafeInventoryType.CHEST);
 					holder.unserialize((String) node.get("item"));
 
-					jukeboxes.add(new CustomJukebox(location, holder.getContents().get(0)));
+					jukeboxes.add(new CustomJukebox(location, (RunsafeMeta) holder.getContents().get(0)));
 				}
 			}
 		}
@@ -82,13 +83,13 @@ public class CustomJukeboxRepository extends Repository
 		HashMap<Integer, List<String>> versions = new HashMap<Integer, List<String>>();
 		ArrayList<String> sql = new ArrayList<String>();
 		sql.add(
-				"CREATE TABLE `moosic_jukeboxes` (" +
-						"`world` VARCHAR(50) NOT NULL," +
-						"`x` DOUBLE NOT NULL," +
-						"`y` DOUBLE NOT NULL," +
-						"`z` DOUBLE NOT NULL," +
-						"`item` longtext" +
-					")"
+			"CREATE TABLE `moosic_jukeboxes` (" +
+				"`world` VARCHAR(50) NOT NULL," +
+				"`x` DOUBLE NOT NULL," +
+				"`y` DOUBLE NOT NULL," +
+				"`z` DOUBLE NOT NULL," +
+				"`item` longtext" +
+				")"
 		);
 		versions.put(1, sql);
 		return versions;
