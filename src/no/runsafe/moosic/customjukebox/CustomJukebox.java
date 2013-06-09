@@ -28,12 +28,9 @@ public class CustomJukebox
 
 	public String getSongName()
 	{
-		RunsafeItemMeta meta = this.item.getItemMeta();
-		List<String> lore = meta.getLore();
-
+		List<String> lore = item.getLore();
 		if (lore.size() > 0)
 			return lore.get(0);
-
 		return "";
 	}
 
@@ -47,7 +44,7 @@ public class CustomJukebox
 		return this.playerID;
 	}
 
-	private RunsafeLocation location;
-	private RunsafeItemStack item;
+	private final RunsafeLocation location;
+	private final RunsafeItemStack item;
 	private int playerID;
 }

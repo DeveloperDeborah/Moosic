@@ -5,12 +5,9 @@ import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.event.IConfigurationChanged;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class MakeRecord extends PlayerCommand implements IConfigurationChanged
 {
@@ -25,14 +22,7 @@ public class MakeRecord extends PlayerCommand implements IConfigurationChanged
 	{
 		RunsafeItemStack item = Item.Special.Crafted.EnchantedBook.getItem();
 		item.setAmount(1);
-
-		RunsafeItemMeta meta = item.getItemMeta();
-		List<String> lore = new ArrayList<String>();
-		lore.add(parameters.get("song"));
-		meta.setLore(lore);
-		meta.setDisplayName(this.customRecordName);
-		item.setItemMeta(meta);
-
+		item.addLore(parameters.get("song")).setDisplayName(customRecordName);
 		executor.getInventory().addItems(item);
 		return "&2Success!";
 	}

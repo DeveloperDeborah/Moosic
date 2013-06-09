@@ -90,8 +90,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 
 	private boolean isCustomRecord(RunsafeItemStack item)
 	{
-		RunsafeItemMeta itemMeta = item.getItemMeta();
-		return itemMeta.getDisplayName().equalsIgnoreCase(this.customRecordName);
+		return item.getDisplayName().equalsIgnoreCase(this.customRecordName);
 	}
 
 	public CustomJukebox getJukeboxAtLocation(RunsafeLocation location)
@@ -149,8 +148,8 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 		this.customRecordName = configuration.getConfigValueAsString("customRecordName");
 	}
 
-	private List<CustomJukebox> jukeboxes = new ArrayList<CustomJukebox>();
+	private final List<CustomJukebox> jukeboxes = new ArrayList<CustomJukebox>();
 	private String customRecordName;
-	private MusicHandler musicHandler;
-	private CustomJukeboxRepository repository;
+	private final MusicHandler musicHandler;
+	private final CustomJukeboxRepository repository;
 }
