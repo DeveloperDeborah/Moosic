@@ -7,7 +7,6 @@ import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.RunsafeWorld;
 import no.runsafe.framework.server.inventory.RunsafeInventory;
 import no.runsafe.framework.server.inventory.RunsafeInventoryType;
-import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.item.meta.RunsafeMeta;
 
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ public class CustomJukeboxRepository extends Repository
 		return "moosic_jukeboxes";
 	}
 
-	public void storeJukebox(RunsafeLocation location, RunsafeItemStack item)
+	public void storeJukebox(RunsafeLocation location, RunsafeMeta item)
 	{
 		RunsafeInventory holder = RunsafeServer.Instance.createInventory(null, RunsafeInventoryType.CHEST);
 		holder.addItems(item);

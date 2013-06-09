@@ -36,7 +36,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 	}
 
 	@Override
-	public boolean OnPlayerRightClick(RunsafePlayer player, RunsafeItemStack usingItem, RunsafeBlock targetBlock)
+	public boolean OnPlayerRightClick(RunsafePlayer player, RunsafeMeta usingItem, RunsafeBlock targetBlock)
 	{
 		RunsafeLocation blockLocation = targetBlock.getLocation();
 		if (targetBlock.is(Item.Decoration.Jukebox))
@@ -57,7 +57,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 						{
 							player.getInventory().remove(usingItem);
 							player.updateInventory();
-							jukebox = this.playJukebox(player, new CustomJukebox(blockLocation, (RunsafeMeta) usingItem));
+							jukebox = this.playJukebox(player, new CustomJukebox(blockLocation, usingItem));
 							this.repository.storeJukebox(blockLocation, usingItem);
 							this.jukeboxes.add(jukebox);
 							return false;
@@ -90,7 +90,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 
 	private boolean isCustomRecord(RunsafeItemStack item)
 	{
-		return item instanceof RunsafeMeta && ((RunsafeMeta)item).getDisplayName().equalsIgnoreCase(this.customRecordName);
+		return item instanceof RunsafeMeta && ((RunsafeMeta) item).getDisplayName().equalsIgnoreCase(this.customRecordName);
 	}
 
 	public CustomJukebox getJukeboxAtLocation(RunsafeLocation location)
