@@ -2,7 +2,6 @@ package no.runsafe.moosic.customjukebox;
 
 import no.runsafe.framework.server.RunsafeLocation;
 import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
 
 import java.util.List;
 

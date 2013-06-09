@@ -10,7 +10,6 @@ import no.runsafe.framework.server.RunsafeLocation;
 import no.runsafe.framework.server.block.RunsafeBlock;
 import no.runsafe.framework.server.event.block.RunsafeBlockBreakEvent;
 import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.moosic.MusicHandler;
 import no.runsafe.moosic.MusicTrack;
