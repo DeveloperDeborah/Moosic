@@ -2,6 +2,8 @@ package no.runsafe.moosic.customjukebox;
 
 import no.runsafe.framework.database.IDatabase;
 import no.runsafe.framework.database.Repository;
+import no.runsafe.framework.database.Row;
+import no.runsafe.framework.database.Set;
 import no.runsafe.framework.server.RunsafeLocation;
 import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.RunsafeWorld;
@@ -12,7 +14,6 @@ import no.runsafe.framework.server.item.meta.RunsafeMeta;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CustomJukeboxRepository extends Repository
 {
@@ -56,18 +57,18 @@ public class CustomJukeboxRepository extends Repository
 	public List<CustomJukebox> getJukeboxes()
 	{
 		List<CustomJukebox> jukeboxes = new ArrayList<CustomJukebox>();
-		List<Map<String, Object>> data = this.database.Query("SELECT world, x, y, z, item FROM moosic_jukeboxes");
+		Set data = this.database.Query("SELECT world, x, y, z, item FROM moosic_jukeboxes");
 
 		if (data != null)
 		{
-			for (Map<String, Object> node : data)
+			for (Row node : data)
 			{
-				RunsafeWorld world = RunsafeServer.Instance.getWorld((String) node.get("world"));
+				RunsafeWorld world = RunsafeServer.Instance.getWorld(node.String("world"));
 				if (world != null)
 				{
-					RunsafeLocation location = new RunsafeLocation(world, getDoubleValue(node, "x"), getDoubleValue(node, "y"), getDoubleValue(node, "z"));
+					RunsafeLocation location = new RunsafeLocation(world, node.Double("x"), node.Double("y"), node.Double("z"));
 					RunsafeInventory holder = RunsafeServer.Instance.createInventory(null, RunsafeInventoryType.CHEST);
-					holder.unserialize((String) node.get("item"));
+					holder.unserialize(node.String("item"));
 
 					jukeboxes.add(new CustomJukebox(location, holder.getContents().get(0)));
 				}
