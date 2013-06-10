@@ -65,7 +65,7 @@ public class CustomJukeboxRepository extends Repository
 				RunsafeWorld world = RunsafeServer.Instance.getWorld((String) node.get("world"));
 				if (world != null)
 				{
-					RunsafeLocation location = new RunsafeLocation(world, (Double) node.get("x"), (Double) node.get("y"), (Double) node.get("z"));
+					RunsafeLocation location = new RunsafeLocation(world, getDoubleValue(node, "x"), getDoubleValue(node, "y"), getDoubleValue(node, "z"));
 					RunsafeInventory holder = RunsafeServer.Instance.createInventory(null, RunsafeInventoryType.CHEST);
 					holder.unserialize((String) node.get("item"));
 
