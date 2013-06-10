@@ -69,7 +69,7 @@ public class CustomJukeboxRepository extends Repository
 					RunsafeInventory holder = RunsafeServer.Instance.createInventory(null, RunsafeInventoryType.CHEST);
 					holder.unserialize((String) node.get("item"));
 
-					jukeboxes.add(new CustomJukebox(location, (RunsafeMeta) holder.getContents().get(0)));
+					jukeboxes.add(new CustomJukebox(location, holder.getContents().get(0)));
 				}
 			}
 		}
