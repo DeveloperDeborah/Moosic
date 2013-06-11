@@ -1,8 +1,8 @@
 package no.runsafe.moosic;
 
-import no.runsafe.framework.output.IOutput;
-import no.runsafe.framework.server.RunsafeLocation;
-import no.runsafe.framework.timer.IScheduler;
+import no.runsafe.framework.api.IOutput;
+import no.runsafe.framework.api.IScheduler;
+import no.runsafe.framework.minecraft.RunsafeLocation;
 
 import java.io.File;
 import java.util.HashMap;
@@ -34,9 +34,11 @@ public class MusicHandler
 		double tickDelay = 1.0 / (double) musicTrack.getTempo();
 		tickDelay = tickDelay * 20D;
 		long delay = (long) tickDelay;
-		int timer = this.scheduler.startSyncRepeatingTask(new Runnable() {
+		int timer = this.scheduler.startSyncRepeatingTask(new Runnable()
+		{
 			@Override
-			public void run() {
+			public void run()
+			{
 				progressPlayer(newID);
 			}
 		}, delay, delay);

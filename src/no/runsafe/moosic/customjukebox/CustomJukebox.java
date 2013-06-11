@@ -1,7 +1,7 @@
 package no.runsafe.moosic.customjukebox;
 
-import no.runsafe.framework.server.RunsafeLocation;
-import no.runsafe.framework.server.item.meta.RunsafeMeta;
+import no.runsafe.framework.minecraft.RunsafeLocation;
+import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
 import java.util.List;
 

@@ -1,17 +1,17 @@
 package no.runsafe.moosic.customjukebox;
 
-import no.runsafe.framework.configuration.IConfiguration;
-import no.runsafe.framework.event.IConfigurationChanged;
-import no.runsafe.framework.event.IPluginEnabled;
-import no.runsafe.framework.event.block.IBlockBreakEvent;
-import no.runsafe.framework.event.player.IPlayerRightClickBlock;
+import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.event.block.IBlockBreakEvent;
+import no.runsafe.framework.api.event.player.IPlayerRightClickBlock;
+import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
+import no.runsafe.framework.api.event.plugin.IPluginEnabled;
 import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.server.RunsafeLocation;
-import no.runsafe.framework.server.block.RunsafeBlock;
-import no.runsafe.framework.server.event.block.RunsafeBlockBreakEvent;
-import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.item.meta.RunsafeMeta;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.minecraft.RunsafeLocation;
+import no.runsafe.framework.minecraft.block.RunsafeBlock;
+import no.runsafe.framework.minecraft.event.block.RunsafeBlockBreakEvent;
+import no.runsafe.framework.minecraft.item.RunsafeItemStack;
+import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.moosic.MusicHandler;
 import no.runsafe.moosic.MusicTrack;
 

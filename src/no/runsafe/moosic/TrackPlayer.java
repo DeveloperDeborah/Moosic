@@ -1,6 +1,6 @@
 package no.runsafe.moosic;
 
-import no.runsafe.framework.server.RunsafeLocation;
+import no.runsafe.framework.minecraft.RunsafeLocation;
 
 import java.util.List;
 

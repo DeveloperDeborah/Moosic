@@ -1,7 +1,7 @@
 package no.runsafe.moosic.commands;
 
-import no.runsafe.framework.command.player.PlayerCommand;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.api.command.player.PlayerCommand;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.moosic.MusicHandler;
 import no.runsafe.moosic.MusicTrack;
 
@@ -28,9 +28,9 @@ public class PlaySong extends PlayerCommand
 		try
 		{
 			int id = this.musicHandler.startSong(
-					new MusicTrack(song),
-					executor.getLocation(),
-					Float.valueOf(parameters.get("volume"))
+				new MusicTrack(song),
+				executor.getLocation(),
+				Float.valueOf(parameters.get("volume"))
 			);
 			return "&2Playing song with player ID: " + id;
 		}
