@@ -1,9 +1,9 @@
 package no.runsafe.moosic.customjukebox;
 
 import no.runsafe.framework.api.database.IDatabase;
-import no.runsafe.framework.internal.database.Repository;
-import no.runsafe.framework.internal.database.Row;
-import no.runsafe.framework.internal.database.Set;
+import no.runsafe.framework.api.database.IRow;
+import no.runsafe.framework.api.database.ISet;
+import no.runsafe.framework.api.database.Repository;
 import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.RunsafeWorld;
@@ -57,11 +57,11 @@ public class CustomJukeboxRepository extends Repository
 	public List<CustomJukebox> getJukeboxes()
 	{
 		List<CustomJukebox> jukeboxes = new ArrayList<CustomJukebox>();
-		Set data = this.database.Query("SELECT world, x, y, z, item FROM moosic_jukeboxes");
+		ISet data = this.database.Query("SELECT world, x, y, z, item FROM moosic_jukeboxes");
 
 		if (data != null)
 		{
-			for (Row node : data)
+			for (IRow node : data)
 			{
 				RunsafeWorld world = RunsafeServer.Instance.getWorld(node.String("world"));
 				if (world != null)

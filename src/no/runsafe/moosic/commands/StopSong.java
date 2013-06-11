@@ -1,7 +1,7 @@
 package no.runsafe.moosic.commands;
 
+import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
-import no.runsafe.framework.internal.command.ExecutableCommand;
 import no.runsafe.moosic.MusicHandler;
 
 import java.util.HashMap;
