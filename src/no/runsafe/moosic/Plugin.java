@@ -20,6 +20,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 
 		this.addComponent(MusicHandler.class);
 		this.addComponent(CustomRecordHandler.class);
+		this.addComponent(SongAPI.class);
 
 		// Commands
 		this.addComponent(PlaySong.class);
