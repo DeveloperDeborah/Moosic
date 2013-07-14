@@ -2,11 +2,9 @@ package no.runsafe.moosic.customjukebox;
 
 import no.runsafe.framework.api.database.IDatabase;
 import no.runsafe.framework.api.database.IRow;
-import no.runsafe.framework.api.database.ISet;
 import no.runsafe.framework.api.database.Repository;
 import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.framework.minecraft.RunsafeServer;
-import no.runsafe.framework.minecraft.RunsafeWorld;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventoryType;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
@@ -57,22 +55,12 @@ public class CustomJukeboxRepository extends Repository
 	public List<CustomJukebox> getJukeboxes()
 	{
 		List<CustomJukebox> jukeboxes = new ArrayList<CustomJukebox>();
-		ISet data = this.database.Query("SELECT world, x, y, z, item FROM moosic_jukeboxes");
-
-		if (data != null)
+		for (IRow node : this.database.Query("SELECT world, x, y, z, item FROM moosic_jukeboxes"))
 		{
-			for (IRow node : data)
-			{
-				RunsafeWorld world = RunsafeServer.Instance.getWorld(node.String("world"));
-				if (world != null)
-				{
-					RunsafeLocation location = new RunsafeLocation(world, node.Double("x"), node.Double("y"), node.Double("z"));
-					RunsafeInventory holder = RunsafeServer.Instance.createInventory(null, RunsafeInventoryType.CHEST);
-					holder.unserialize(node.String("item"));
-
-					jukeboxes.add(new CustomJukebox(location, holder.getContents().get(0)));
-				}
-			}
+			RunsafeLocation location = node.Location();
+			RunsafeInventory holder = RunsafeServer.Instance.createInventory(null, RunsafeInventoryType.CHEST);
+			holder.unserialize(node.String("item"));
+			jukeboxes.add(new CustomJukebox(location, holder.getContents().get(0)));
 		}
 		return jukeboxes;
 	}
