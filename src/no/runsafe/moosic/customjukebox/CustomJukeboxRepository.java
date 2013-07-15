@@ -1,5 +1,6 @@
 package no.runsafe.moosic.customjukebox;
 
+import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.database.IDatabase;
 import no.runsafe.framework.api.database.IRow;
 import no.runsafe.framework.api.database.Repository;
@@ -15,9 +16,10 @@ import java.util.List;
 
 public class CustomJukeboxRepository extends Repository
 {
-	public CustomJukeboxRepository(IDatabase database)
+	public CustomJukeboxRepository(IDatabase database, IOutput console)
 	{
 		this.database = database;
+		this.console = console;
 	}
 
 	@Override
@@ -58,6 +60,11 @@ public class CustomJukeboxRepository extends Repository
 		for (IRow node : this.database.Query("SELECT world, x, y, z, item FROM moosic_jukeboxes"))
 		{
 			RunsafeLocation location = node.Location();
+			if (location == null)
+			{
+				console.logError("Tried initializing jukebox at null location from database! (%s)", node.String("world"));
+				continue;
+			}
 			RunsafeInventory holder = RunsafeServer.Instance.createInventory(null, RunsafeInventoryType.CHEST);
 			holder.unserialize(node.String("item"));
 			jukeboxes.add(new CustomJukebox(location, holder.getContents().get(0)));
@@ -84,4 +91,5 @@ public class CustomJukeboxRepository extends Repository
 	}
 
 	private final IDatabase database;
+	private final IOutput console;
 }
