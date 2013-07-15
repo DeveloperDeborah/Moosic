@@ -11,6 +11,9 @@ public class CustomJukebox
 	{
 		this.location = location;
 		this.item = item;
+
+		if (location == null)
+			throw new IllegalArgumentException("A jukebox must have a location!");
 	}
 
 	public RunsafeLocation getLocation()
