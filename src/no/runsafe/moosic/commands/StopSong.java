@@ -4,7 +4,7 @@ import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.moosic.MusicHandler;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class StopSong extends ExecutableCommand
 {
@@ -15,7 +15,7 @@ public class StopSong extends ExecutableCommand
 	}
 
 	@Override
-	public String OnExecute(ICommandExecutor executor, HashMap<String, String> parameters)
+	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
 	{
 		int playerID = Integer.valueOf(parameters.get("playerID"));
 		if (this.musicHandler.forceStop(playerID))

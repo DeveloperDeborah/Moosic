@@ -6,7 +6,7 @@ import no.runsafe.moosic.MusicHandler;
 import no.runsafe.moosic.MusicTrack;
 
 import java.io.File;
-import java.util.HashMap;
+import java.util.Map;
 
 public class PlaySong extends PlayerCommand
 {
@@ -18,7 +18,7 @@ public class PlaySong extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
 	{
 		File song = this.musicHandler.loadSongFile(parameters.get("song"));
 

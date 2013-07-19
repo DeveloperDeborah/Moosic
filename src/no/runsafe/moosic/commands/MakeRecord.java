@@ -7,7 +7,7 @@ import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class MakeRecord extends PlayerCommand implements IConfigurationChanged
 {
@@ -18,7 +18,7 @@ public class MakeRecord extends PlayerCommand implements IConfigurationChanged
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
 	{
 		RunsafeMeta item = Item.Special.Crafted.EnchantedBook.getItem();
 		item.setAmount(1);
