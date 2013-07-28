@@ -1,6 +1,7 @@
 package no.runsafe.moosic.commands;
 
 import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.minecraft.Item;
@@ -13,8 +14,7 @@ public class MakeRecord extends PlayerCommand implements IConfigurationChanged
 {
 	public MakeRecord()
 	{
-		super("makerecord", "Forges a record with the item currently being held.", "runsafe.moosic.record.make", "song");
-		captureTail();
+		super("makerecord", "Forges a record with the item currently being held.", "runsafe.moosic.record.make", new TrailingArgument("song"));
 	}
 
 	@Override
