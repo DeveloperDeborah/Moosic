@@ -14,7 +14,10 @@ public class MakeRecord extends PlayerCommand implements IConfigurationChanged
 {
 	public MakeRecord()
 	{
-		super("makerecord", "Forges a record with the item currently being held.", "runsafe.moosic.record.make", new TrailingArgument("song"));
+		super(
+			"makerecord", "Forges a record with the item currently being held.", "runsafe.moosic.record.make",
+			new TrailingArgument("song")
+		);
 	}
 
 	@Override

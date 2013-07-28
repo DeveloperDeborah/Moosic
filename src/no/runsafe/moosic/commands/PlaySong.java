@@ -1,5 +1,6 @@
 package no.runsafe.moosic.commands;
 
+import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.moosic.MusicHandler;
@@ -12,7 +13,10 @@ public class PlaySong extends PlayerCommand
 {
 	public PlaySong(MusicHandler musicHandler)
 	{
-		super("playsong", "Plays a song at your location.", "runsafe.moosic.play", "song", "volume");
+		super(
+			"playsong", "Plays a song at your location.", "runsafe.moosic.play",
+			new RequiredArgument("song"), new RequiredArgument("volume")
+		);
 		this.musicHandler = musicHandler;
 
 	}
