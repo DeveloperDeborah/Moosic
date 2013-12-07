@@ -1,13 +1,13 @@
 package no.runsafe.moosic.customjukebox;
 
 import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.event.block.IBlockBreakEvent;
 import no.runsafe.framework.api.event.player.IPlayerRightClickBlock;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.RunsafeLocation;
-import no.runsafe.framework.minecraft.block.RunsafeBlock;
 import no.runsafe.framework.minecraft.event.block.RunsafeBlockBreakEvent;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
@@ -36,7 +36,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 	}
 
 	@Override
-	public boolean OnPlayerRightClick(RunsafePlayer player, RunsafeMeta usingItem, RunsafeBlock targetBlock)
+	public boolean OnPlayerRightClick(RunsafePlayer player, RunsafeMeta usingItem, IBlock targetBlock)
 	{
 		RunsafeLocation blockLocation = targetBlock.getLocation();
 		if (targetBlock.is(Item.Decoration.Jukebox))

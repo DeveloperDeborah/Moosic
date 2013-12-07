@@ -3,9 +3,11 @@ package no.runsafe.moosic;
 import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.minecraft.RunsafeLocation;
+import sun.util.logging.PlatformLogger;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.logging.Level;
 
 public class MusicHandler
 {
@@ -18,7 +20,7 @@ public class MusicHandler
 		File pathDir = new File(this.path);
 		if (!pathDir.exists())
 			if (!pathDir.mkdirs())
-				output.writeColoured("&cUnable to create directories at " + this.path);
+				output.logWarning("&cUnable to create directories at %s", this.path);
 	}
 
 	public File loadSongFile(String fileName)
