@@ -6,12 +6,12 @@ import no.runsafe.framework.api.event.block.IBlockBreakEvent;
 import no.runsafe.framework.api.event.player.IPlayerRightClickBlock;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.framework.minecraft.event.block.RunsafeBlockBreakEvent;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.moosic.MusicHandler;
 import no.runsafe.moosic.MusicTrack;
 
@@ -36,7 +36,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 	}
 
 	@Override
-	public boolean OnPlayerRightClick(RunsafePlayer player, RunsafeMeta usingItem, IBlock targetBlock)
+	public boolean OnPlayerRightClick(IPlayer player, RunsafeMeta usingItem, IBlock targetBlock)
 	{
 		RunsafeLocation blockLocation = targetBlock.getLocation();
 		if (targetBlock.is(Item.Decoration.Jukebox))
@@ -103,7 +103,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 		return null;
 	}
 
-	private CustomJukebox playJukebox(RunsafePlayer player, CustomJukebox jukebox)
+	private CustomJukebox playJukebox(IPlayer player, CustomJukebox jukebox)
 	{
 		File musicFile = this.musicHandler.loadSongFile(jukebox.getSongName() + ".nbs");
 		if (musicFile.exists())
