@@ -3,11 +3,9 @@ package no.runsafe.moosic;
 import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.minecraft.RunsafeLocation;
-import sun.util.logging.PlatformLogger;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.logging.Level;
 
 public class MusicHandler
 {
