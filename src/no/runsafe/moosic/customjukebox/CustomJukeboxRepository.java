@@ -2,10 +2,10 @@ package no.runsafe.moosic.customjukebox;
 
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IOutput;
+import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.database.IDatabase;
 import no.runsafe.framework.api.database.IRow;
 import no.runsafe.framework.api.database.Repository;
-import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventoryType;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
@@ -16,10 +16,11 @@ import java.util.List;
 
 public class CustomJukeboxRepository extends Repository
 {
-	public CustomJukeboxRepository(IDatabase database, IOutput console)
+	public CustomJukeboxRepository(IDatabase database, IOutput console, IServer server)
 	{
 		this.database = database;
 		this.console = console;
+		this.server = server;
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class CustomJukeboxRepository extends Repository
 
 	public void storeJukebox(ILocation location, RunsafeMeta item)
 	{
-		RunsafeInventory holder = RunsafeServer.Instance.createInventory(null, RunsafeInventoryType.CHEST);
+		RunsafeInventory holder = server.createInventory(null, RunsafeInventoryType.CHEST);
 		holder.addItems(item);
 
 		this.database.Execute(
@@ -65,7 +66,7 @@ public class CustomJukeboxRepository extends Repository
 				console.logError("Tried initializing jukebox at null location from database! (%s)", node.String("world"));
 				continue;
 			}
-			RunsafeInventory holder = RunsafeServer.Instance.createInventory(null, RunsafeInventoryType.CHEST);
+			RunsafeInventory holder = server.createInventory(null, RunsafeInventoryType.CHEST);
 			holder.unserialize(node.String("item"));
 			jukeboxes.add(new CustomJukebox(location, holder.getContents().get(0)));
 		}
@@ -92,4 +93,5 @@ public class CustomJukeboxRepository extends Repository
 
 	private final IDatabase database;
 	private final IOutput console;
+	private final IServer server;
 }
