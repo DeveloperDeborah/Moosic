@@ -1,12 +1,12 @@
 package no.runsafe.moosic;
 
-import no.runsafe.framework.minecraft.RunsafeLocation;
+import no.runsafe.framework.api.ILocation;
 
 import java.util.List;
 
 public class TrackPlayer
 {
-	public TrackPlayer(RunsafeLocation location, MusicTrack musicTrack, float volume)
+	public TrackPlayer(ILocation location, MusicTrack musicTrack, float volume)
 	{
 		this.location = location;
 		this.volume = volume;
@@ -37,7 +37,7 @@ public class TrackPlayer
 		this.timerID = timerID;
 	}
 
-	private final RunsafeLocation location;
+	private final ILocation location;
 	private final float volume;
 	private short currentTick = -1;
 	private int timerID = -1;

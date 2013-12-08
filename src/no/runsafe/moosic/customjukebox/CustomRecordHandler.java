@@ -1,6 +1,7 @@
 package no.runsafe.moosic.customjukebox;
 
 import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.event.block.IBlockBreakEvent;
 import no.runsafe.framework.api.event.player.IPlayerRightClickBlock;
@@ -8,7 +9,6 @@ import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.framework.minecraft.event.block.RunsafeBlockBreakEvent;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
@@ -38,7 +38,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 	@Override
 	public boolean OnPlayerRightClick(IPlayer player, RunsafeMeta usingItem, IBlock targetBlock)
 	{
-		RunsafeLocation blockLocation = targetBlock.getLocation();
+		ILocation blockLocation = targetBlock.getLocation();
 		if (targetBlock.is(Item.Decoration.Jukebox))
 		{
 			CustomJukebox jukebox = this.getJukeboxAtLocation(blockLocation);
@@ -93,7 +93,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 		return item instanceof RunsafeMeta && ((RunsafeMeta) item).getDisplayName().equalsIgnoreCase(this.customRecordName);
 	}
 
-	public CustomJukebox getJukeboxAtLocation(RunsafeLocation location)
+	public CustomJukebox getJukeboxAtLocation(ILocation location)
 	{
 		for (CustomJukebox jukebox : this.jukeboxes)
 			if (jukebox.getLocation().getWorld().equals(location.getWorld()))

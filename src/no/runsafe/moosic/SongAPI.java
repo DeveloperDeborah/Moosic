@@ -1,10 +1,10 @@
 package no.runsafe.moosic;
 
 import no.runsafe.framework.RunsafePlugin;
+import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.lua.FunctionParameters;
 import no.runsafe.framework.api.lua.Library;
 import no.runsafe.framework.api.lua.RunsafeLuaFunction;
-import no.runsafe.framework.minecraft.RunsafeLocation;
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
 
@@ -36,7 +36,7 @@ public class SongAPI extends Library
 		public List<Object> run(FunctionParameters parameters)
 		{
 			List<Object> returnValues = new ArrayList<Object>();
-			RunsafeLocation location = parameters.getLocation(0);
+			ILocation location = parameters.getLocation(0);
 
 			File songFile = musicHandler.loadSongFile(parameters.getString(4));
 			if (!songFile.exists())

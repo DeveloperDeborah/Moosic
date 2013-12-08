@@ -1,10 +1,10 @@
 package no.runsafe.moosic.customjukebox;
 
+import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.database.IDatabase;
 import no.runsafe.framework.api.database.IRow;
 import no.runsafe.framework.api.database.Repository;
-import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventoryType;
@@ -28,7 +28,7 @@ public class CustomJukeboxRepository extends Repository
 		return "moosic_jukeboxes";
 	}
 
-	public void storeJukebox(RunsafeLocation location, RunsafeMeta item)
+	public void storeJukebox(ILocation location, RunsafeMeta item)
 	{
 		RunsafeInventory holder = RunsafeServer.Instance.createInventory(null, RunsafeInventoryType.CHEST);
 		holder.addItems(item);
@@ -43,7 +43,7 @@ public class CustomJukeboxRepository extends Repository
 		);
 	}
 
-	public void deleteJukeboxes(RunsafeLocation location)
+	public void deleteJukeboxes(ILocation location)
 	{
 		this.database.Execute(
 			"DELETE FROM `moosic_jukeboxes` WHERE world = ? AND x = ? AND y = ? AND z = ?",
@@ -59,7 +59,7 @@ public class CustomJukeboxRepository extends Repository
 		List<CustomJukebox> jukeboxes = new ArrayList<CustomJukebox>();
 		for (IRow node : this.database.Query("SELECT world, x, y, z, item FROM moosic_jukeboxes"))
 		{
-			RunsafeLocation location = node.Location();
+			ILocation location = node.Location();
 			if (location == null)
 			{
 				console.logError("Tried initializing jukebox at null location from database! (%s)", node.String("world"));

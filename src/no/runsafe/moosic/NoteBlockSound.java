@@ -1,6 +1,6 @@
 package no.runsafe.moosic;
 
-import no.runsafe.framework.minecraft.RunsafeLocation;
+import no.runsafe.framework.api.ILocation;
 
 public class NoteBlockSound
 {
@@ -10,7 +10,7 @@ public class NoteBlockSound
 		this.key = key;
 	}
 
-	public void playAtLocation(RunsafeLocation location, float volume)
+	public void playAtLocation(ILocation location, float volume)
 	{
 		float pitch = (float) Math.pow(2.0, ((double) (key - 33) - 12.0) / 12.0);
 		location.getWorld().playSound(location, this.instrument.getSound(), volume, pitch);

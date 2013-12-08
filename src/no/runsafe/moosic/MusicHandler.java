@@ -1,8 +1,8 @@
 package no.runsafe.moosic;
 
+import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.IScheduler;
-import no.runsafe.framework.minecraft.RunsafeLocation;
 
 import java.io.File;
 import java.util.HashMap;
@@ -26,7 +26,7 @@ public class MusicHandler
 		return new File(this.path + fileName);
 	}
 
-	public int startSong(MusicTrack musicTrack, RunsafeLocation location, float volume)
+	public int startSong(MusicTrack musicTrack, ILocation location, float volume)
 	{
 		TrackPlayer trackPlayer = new TrackPlayer(location, musicTrack, volume);
 		final int newID = this.currentTrackPlayerID + 1;
