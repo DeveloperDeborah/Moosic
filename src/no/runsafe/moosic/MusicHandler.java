@@ -1,15 +1,15 @@
 package no.runsafe.moosic;
 
 import no.runsafe.framework.api.ILocation;
-import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.IScheduler;
+import no.runsafe.framework.api.log.IConsole;
 
 import java.io.File;
 import java.util.HashMap;
 
 public class MusicHandler
 {
-	public MusicHandler(IScheduler scheduler, Plugin moosic, IOutput output)
+	public MusicHandler(IScheduler scheduler, Plugin moosic, IConsole output)
 	{
 		this.scheduler = scheduler;
 		this.path = String.format("plugins/%s/songs/", moosic.getName());
