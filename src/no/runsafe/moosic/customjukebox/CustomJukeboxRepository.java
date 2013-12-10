@@ -1,11 +1,11 @@
 package no.runsafe.moosic.customjukebox;
 
 import no.runsafe.framework.api.ILocation;
-import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.database.IDatabase;
 import no.runsafe.framework.api.database.IRow;
 import no.runsafe.framework.api.database.Repository;
+import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventoryType;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class CustomJukeboxRepository extends Repository
 {
-	public CustomJukeboxRepository(IDatabase database, IOutput console, IServer server)
+	public CustomJukeboxRepository(IDatabase database, IConsole console, IServer server)
 	{
 		this.database = database;
 		this.console = console;
@@ -92,6 +92,6 @@ public class CustomJukeboxRepository extends Repository
 	}
 
 	private final IDatabase database;
-	private final IOutput console;
+	private final IConsole console;
 	private final IServer server;
 }
