@@ -1,7 +1,8 @@
 package no.runsafe.moosic;
 
 import no.runsafe.framework.RunsafeConfigurablePlugin;
-import no.runsafe.framework.api.IOutput;
+import no.runsafe.framework.features.Commands;
+import no.runsafe.framework.features.Events;
 import no.runsafe.moosic.commands.MakeRecord;
 import no.runsafe.moosic.commands.PlaySong;
 import no.runsafe.moosic.commands.StopSong;
@@ -13,7 +14,8 @@ public class Plugin extends RunsafeConfigurablePlugin
 	@Override
 	protected void PluginSetup()
 	{
-		Plugin.output = this.getComponent(IOutput.class);
+		addComponent(Events.class);
+		addComponent(Commands.class);
 
 		// Repositories
 		this.addComponent(CustomJukeboxRepository.class);
@@ -32,6 +34,4 @@ public class Plugin extends RunsafeConfigurablePlugin
 	{
 		this.getComponent(CustomRecordHandler.class).onTrackPlayerStopped(playerID);
 	}
-
-	public static IOutput output;
 }
