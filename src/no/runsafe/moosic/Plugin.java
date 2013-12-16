@@ -12,7 +12,7 @@ import no.runsafe.moosic.customjukebox.CustomRecordHandler;
 public class Plugin extends RunsafeConfigurablePlugin
 {
 	@Override
-	protected void PluginSetup()
+	protected void pluginSetup()
 	{
 		addComponent(Events.class);
 		addComponent(Commands.class);
