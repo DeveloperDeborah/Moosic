@@ -122,7 +122,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 		}
 		else
 		{
-			// Corrupt record, presumably.
+			// Corrupt record or invalid file.
 			player.sendColouredMessage("&cThe record cracks and scratches as you put it in the jukebox.");
 		}
 		return jukebox;
