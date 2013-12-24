@@ -30,9 +30,9 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 	@Override
 	public void OnBlockBreakEvent(RunsafeBlockBreakEvent event)
 	{
-		CustomJukebox jukebox = this.getJukeboxAtLocation(event.getBlock().getLocation());
+		CustomJukebox jukebox = getJukeboxAtLocation(event.getBlock().getLocation());
 		if (jukebox != null)
-			this.stopJukebox(jukebox);
+			stopJukebox(jukebox);
 	}
 
 	@Override
@@ -41,10 +41,10 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 		ILocation blockLocation = targetBlock.getLocation();
 		if (targetBlock.is(Item.Decoration.Jukebox))
 		{
-			CustomJukebox jukebox = this.getJukeboxAtLocation(blockLocation);
+			CustomJukebox jukebox = getJukeboxAtLocation(blockLocation);
 			if (jukebox != null)
 			{
-				this.stopJukebox(jukebox);
+				stopJukebox(jukebox);
 				return false;
 			}
 			else
@@ -56,9 +56,9 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 						if (this.isCustomRecord(usingItem))
 						{
 							player.removeExactItem(usingItem, 1);
-							jukebox = this.playJukebox(player, new CustomJukebox(blockLocation, usingItem));
-							this.repository.storeJukebox(blockLocation, usingItem);
-							this.jukeboxes.add(jukebox);
+							jukebox = playJukebox(player, new CustomJukebox(blockLocation, usingItem));
+							repository.storeJukebox(blockLocation, usingItem);
+							jukeboxes.add(jukebox);
 							return false;
 						}
 					}
@@ -72,19 +72,19 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 	public void OnPluginEnabled()
 	{
 		// Restore any active jukeboxes from the DB.
-		for (CustomJukebox jukebox : this.repository.getJukeboxes())
-			this.jukeboxes.add(jukebox);
+		for (CustomJukebox jukebox : repository.getJukeboxes())
+			jukeboxes.add(jukebox);
 	}
 
 	private void stopJukebox(CustomJukebox jukebox)
 	{
 		int playerID = jukebox.getPlayerID();
-		if (this.musicHandler.playerExists(playerID))
-			this.musicHandler.forceStop(playerID);
+		if (musicHandler.playerExists(playerID))
+			musicHandler.forceStop(playerID);
 
 		jukebox.ejectRecord();
-		this.jukeboxes.remove(jukebox);
-		this.repository.deleteJukeboxes(jukebox.getLocation());
+		jukeboxes.remove(jukebox);
+		repository.deleteJukeboxes(jukebox.getLocation());
 	}
 
 	private boolean isCustomRecord(RunsafeItemStack item)
@@ -94,7 +94,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 
 	public CustomJukebox getJukeboxAtLocation(ILocation location)
 	{
-		for (CustomJukebox jukebox : this.jukeboxes)
+		for (CustomJukebox jukebox : jukeboxes)
 			if (jukebox.getLocation().getWorld().equals(location.getWorld()))
 				if (jukebox.getLocation().distance(location) < 1)
 					return jukebox;
@@ -104,7 +104,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 
 	private CustomJukebox playJukebox(IPlayer player, CustomJukebox jukebox)
 	{
-		File musicFile = this.musicHandler.loadSongFile(jukebox.getSongName() + ".nbs");
+		File musicFile = musicHandler.loadSongFile(jukebox.getSongName() + ".nbs");
 		if (musicFile.exists())
 		{
 			MusicTrack musicTrack = null;
@@ -118,7 +118,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 			}
 
 			if (musicTrack != null)
-				jukebox.setPlayerID(this.musicHandler.startSong(musicTrack, jukebox.getLocation(), 65));
+				jukebox.setPlayerID(musicHandler.startSong(musicTrack, jukebox.getLocation(), 65));
 		}
 		else
 		{
@@ -130,13 +130,13 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 
 	public void onTrackPlayerStopped(int trackPlayerID)
 	{
-		for (CustomJukebox jukebox : this.jukeboxes)
+		for (CustomJukebox jukebox : jukeboxes)
 		{
 			if (jukebox.getPlayerID() == trackPlayerID)
 			{
-				this.jukeboxes.remove(jukebox);
+				jukeboxes.remove(jukebox);
 				jukebox.setPlayerID(-1);
-				this.jukeboxes.add(jukebox);
+				jukeboxes.add(jukebox);
 			}
 		}
 	}
@@ -144,7 +144,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 	@Override
 	public void OnConfigurationChanged(IConfiguration configuration)
 	{
-		this.customRecordName = configuration.getConfigValueAsString("customRecordName");
+		customRecordName = configuration.getConfigValueAsString("customRecordName");
 	}
 
 	private final List<CustomJukebox> jukeboxes = new ArrayList<CustomJukebox>();
