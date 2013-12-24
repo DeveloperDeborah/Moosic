@@ -55,8 +55,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 					{
 						if (this.isCustomRecord(usingItem))
 						{
-							player.getInventory().remove(usingItem);
-							player.updateInventory();
+							player.removeExactItem(usingItem, 1);
 							jukebox = this.playJukebox(player, new CustomJukebox(blockLocation, usingItem));
 							this.repository.storeJukebox(blockLocation, usingItem);
 							this.jukeboxes.add(jukebox);
