@@ -34,7 +34,7 @@ public class CustomJukeboxRepository extends Repository
 		RunsafeInventory holder = server.createInventory(null, RunsafeInventoryType.CHEST);
 		holder.addItems(item);
 
-		this.database.Execute(
+		this.database.execute(
 			"INSERT INTO `moosic_jukeboxes` (world, x, y, z, item) VALUES(?, ?, ?, ?, ?)",
 			location.getWorld().getName(),
 			location.getBlockX(),
@@ -46,7 +46,7 @@ public class CustomJukeboxRepository extends Repository
 
 	public void deleteJukeboxes(ILocation location)
 	{
-		this.database.Execute(
+		this.database.execute(
 			"DELETE FROM `moosic_jukeboxes` WHERE world = ? AND x = ? AND y = ? AND z = ?",
 			location.getWorld().getName(),
 			location.getBlockX(),
@@ -58,7 +58,7 @@ public class CustomJukeboxRepository extends Repository
 	public List<CustomJukebox> getJukeboxes()
 	{
 		List<CustomJukebox> jukeboxes = new ArrayList<CustomJukebox>();
-		for (IRow node : this.database.Query("SELECT world, x, y, z, item FROM moosic_jukeboxes"))
+		for (IRow node : this.database.query("SELECT world, x, y, z, item FROM moosic_jukeboxes"))
 		{
 			ILocation location = node.Location();
 			if (location == null)
