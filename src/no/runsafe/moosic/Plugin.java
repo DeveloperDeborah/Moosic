@@ -2,6 +2,7 @@ package no.runsafe.moosic;
 
 import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.features.Commands;
+import no.runsafe.framework.features.Database;
 import no.runsafe.framework.features.Events;
 import no.runsafe.moosic.commands.MakeRecord;
 import no.runsafe.moosic.commands.PlaySong;
@@ -16,6 +17,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 	{
 		addComponent(Events.class);
 		addComponent(Commands.class);
+		addComponent(Database.class);
 
 		// Repositories
 		this.addComponent(CustomJukeboxRepository.class);
