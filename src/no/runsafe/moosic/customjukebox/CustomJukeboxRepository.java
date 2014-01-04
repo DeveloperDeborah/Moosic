@@ -77,7 +77,7 @@ public class CustomJukeboxRepository extends Repository
 	public HashMap<Integer, List<String>> getSchemaUpdateQueries()
 	{
 		HashMap<Integer, List<String>> versions = new HashMap<Integer, List<String>>(1);
-		ArrayList<String> sql = new ArrayList<String>();
+		ArrayList<String> sql = new ArrayList<String>(1);
 		sql.add(
 			"CREATE TABLE `moosic_jukeboxes` (" +
 				"`world` VARCHAR(50) NOT NULL," +
