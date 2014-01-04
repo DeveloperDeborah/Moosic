@@ -20,20 +20,20 @@ public class Moosic extends RunsafeConfigurablePlugin
 		addComponent(Database.class);
 
 		// Repositories
-		this.addComponent(CustomJukeboxRepository.class);
+		addComponent(CustomJukeboxRepository.class);
 
-		this.addComponent(MusicHandler.class);
-		this.addComponent(CustomRecordHandler.class);
-		this.addComponent(SongAPI.class);
+		addComponent(MusicHandler.class);
+		addComponent(CustomRecordHandler.class);
+		addComponent(SongAPI.class);
 
 		// Commands
-		this.addComponent(PlaySong.class);
-		this.addComponent(StopSong.class);
-		this.addComponent(MakeRecord.class);
+		addComponent(PlaySong.class);
+		addComponent(StopSong.class);
+		addComponent(MakeRecord.class);
 	}
 
 	public void trackStop(int playerID)
 	{
-		this.getComponent(CustomRecordHandler.class).onTrackPlayerStopped(playerID);
+		getComponent(CustomRecordHandler.class).onTrackPlayerStopped(playerID);
 	}
 }
