@@ -1,5 +1,5 @@
 name: Moosic
-main: no.runsafe.moosic.Plugin
+main: no.runsafe.moosic.Moosic
 version: 1.0.@BUILD@
 author: Kruithne
 description: Customized music plug-in

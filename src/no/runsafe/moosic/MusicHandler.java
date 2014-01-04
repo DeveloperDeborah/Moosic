@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class MusicHandler
 {
-	public MusicHandler(IScheduler scheduler, Plugin moosic, IConsole output)
+	public MusicHandler(IScheduler scheduler, Moosic moosic, IConsole output)
 	{
 		this.scheduler = scheduler;
 		this.path = String.format("plugins/%s/songs/", moosic.getName());
@@ -84,5 +84,5 @@ public class MusicHandler
 	private final HashMap<Integer, TrackPlayer> trackPlayers = new HashMap<Integer, TrackPlayer>();
 	private int currentTrackPlayerID = 0;
 	private final String path;
-	private final Plugin moosic;
+	private final Moosic moosic;
 }

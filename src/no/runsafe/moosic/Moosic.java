@@ -10,7 +10,7 @@ import no.runsafe.moosic.commands.StopSong;
 import no.runsafe.moosic.customjukebox.CustomJukeboxRepository;
 import no.runsafe.moosic.customjukebox.CustomRecordHandler;
 
-public class Plugin extends RunsafeConfigurablePlugin
+public class Moosic extends RunsafeConfigurablePlugin
 {
 	@Override
 	protected void pluginSetup()
