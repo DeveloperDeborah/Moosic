@@ -12,6 +12,7 @@ import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class CustomJukeboxRepository extends Repository
@@ -76,7 +77,7 @@ public class CustomJukeboxRepository extends Repository
 	@Override
 	public HashMap<Integer, List<String>> getSchemaUpdateQueries()
 	{
-		HashMap<Integer, List<String>> versions = new HashMap<Integer, List<String>>(1);
+		HashMap<Integer, List<String>> versions = new LinkedHashMap<Integer, List<String>>(1);
 		ArrayList<String> sql = new ArrayList<String>(1);
 		sql.add(
 			"CREATE TABLE `moosic_jukeboxes` (" +
