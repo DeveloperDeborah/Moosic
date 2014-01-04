@@ -33,16 +33,20 @@ public class CustomJukeboxRepository extends Repository
 	public void storeJukebox(ILocation location, RunsafeMeta item)
 	{
 		RunsafeInventory holder = server.createInventory(null, RunsafeInventoryType.CHEST);
-		holder.addItems(item);
 
-		this.database.execute(
-			"INSERT INTO `moosic_jukeboxes` (world, x, y, z, item) VALUES(?, ?, ?, ?, ?)",
-			location.getWorld().getName(),
-			location.getBlockX(),
-			location.getBlockY(),
-			location.getBlockZ(),
-			holder.serialize()
-		);
+		if (holder != null)
+		{
+			holder.addItems(item);
+
+			this.database.execute(
+				"INSERT INTO `moosic_jukeboxes` (world, x, y, z, item) VALUES(?, ?, ?, ?, ?)",
+				location.getWorld().getName(),
+				location.getBlockX(),
+				location.getBlockY(),
+				location.getBlockZ(),
+				holder.serialize()
+			);
+		}
 	}
 
 	public void deleteJukeboxes(ILocation location)
@@ -68,8 +72,12 @@ public class CustomJukeboxRepository extends Repository
 				continue;
 			}
 			RunsafeInventory holder = server.createInventory(null, RunsafeInventoryType.CHEST);
-			holder.unserialize(node.String("item"));
-			jukeboxes.add(new CustomJukebox(location, holder.getContents().get(0)));
+
+			if (holder != null)
+			{
+				holder.unserialize(node.String("item"));
+				jukeboxes.add(new CustomJukebox(location, holder.getContents().get(0)));
+			}
 		}
 		return jukeboxes;
 	}
