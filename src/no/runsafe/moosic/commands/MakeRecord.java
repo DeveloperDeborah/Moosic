@@ -1,14 +1,13 @@
 package no.runsafe.moosic.commands;
 
 import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
-
-import java.util.Map;
 
 public class MakeRecord extends PlayerCommand implements IConfigurationChanged
 {
@@ -21,7 +20,7 @@ public class MakeRecord extends PlayerCommand implements IConfigurationChanged
 	}
 
 	@Override
-	public String OnExecute(IPlayer executor, Map<String, String> parameters)
+	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		RunsafeMeta item = Item.Special.Crafted.EnchantedBook.getItem();
 		item.setAmount(1);

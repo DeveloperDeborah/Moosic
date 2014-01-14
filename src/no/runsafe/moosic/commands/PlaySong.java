@@ -1,5 +1,6 @@
 package no.runsafe.moosic.commands;
 
+import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
@@ -7,7 +8,6 @@ import no.runsafe.moosic.MusicHandler;
 import no.runsafe.moosic.MusicTrack;
 
 import java.io.File;
-import java.util.Map;
 
 public class PlaySong extends PlayerCommand
 {
@@ -22,7 +22,7 @@ public class PlaySong extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(IPlayer executor, Map<String, String> parameters)
+	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		File song = this.musicHandler.loadSongFile(parameters.get("song"));
 
