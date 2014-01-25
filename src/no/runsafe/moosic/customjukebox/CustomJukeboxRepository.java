@@ -13,9 +13,8 @@ import java.util.List;
 
 public class CustomJukeboxRepository extends Repository
 {
-	public CustomJukeboxRepository(IDatabase database, IConsole console, IServer server)
+	public CustomJukeboxRepository(IConsole console, IServer server)
 	{
-		this.database = database;
 		this.console = console;
 		this.server = server;
 	}
@@ -96,7 +95,6 @@ public class CustomJukeboxRepository extends Repository
 		return update;
 	}
 
-	private final IDatabase database;
 	private final IConsole console;
 	private final IServer server;
 }
