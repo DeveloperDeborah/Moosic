@@ -118,7 +118,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 			}
 
 			if (musicTrack != null)
-				jukebox.setPlayerID(musicHandler.startSong(musicTrack, jukebox.getLocation(), 65));
+				jukebox.setPlayerID(musicHandler.startSong(musicTrack, jukebox.getLocation(), 10));
 		}
 		else
 		{
