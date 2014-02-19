@@ -15,26 +15,26 @@ public class MusicHandler
 		this.path = String.format("plugins/%s/songs/", moosic.getName());
 		this.moosic = moosic;
 
-		File pathDir = new File(this.path);
+		File pathDir = new File(path);
 		if (!pathDir.exists())
 			if (!pathDir.mkdirs())
-				output.logWarning("&cUnable to create directories at %s", this.path);
+				output.logWarning("&cUnable to create directories at %s", path);
 	}
 
 	public File loadSongFile(String fileName)
 	{
-		return new File(this.path + fileName);
+		return new File(path + fileName);
 	}
 
 	public int startSong(MusicTrack musicTrack, ILocation location, float volume)
 	{
 		TrackPlayer trackPlayer = new TrackPlayer(location, musicTrack, volume);
-		final int newID = this.currentTrackPlayerID + 1;
+		final int newID = currentTrackPlayerID + 1;
 
 		double tickDelay = 1.0 / (double) musicTrack.getTempo();
 		tickDelay = tickDelay * 20D;
 		long delay = (long) tickDelay;
-		int timer = this.scheduler.startSyncRepeatingTask(new Runnable()
+		int timer = scheduler.startSyncRepeatingTask(new Runnable()
 		{
 			@Override
 			public void run()
@@ -44,17 +44,17 @@ public class MusicHandler
 		}, delay, delay);
 
 		trackPlayer.setTimerID(timer);
-		this.trackPlayers.put(newID, trackPlayer);
+		trackPlayers.put(newID, trackPlayer);
 
-		this.currentTrackPlayerID = newID;
+		currentTrackPlayerID = newID;
 		return currentTrackPlayerID;
 	}
 
 	public boolean forceStop(int playerID)
 	{
-		if (this.trackPlayers.containsKey(playerID))
+		if (trackPlayers.containsKey(playerID))
 		{
-			this.stopPlayer(playerID);
+			stopPlayer(playerID);
 			return true;
 		}
 		return false;
@@ -62,22 +62,22 @@ public class MusicHandler
 
 	public boolean playerExists(int playerID)
 	{
-		return this.trackPlayers.containsKey(playerID);
+		return trackPlayers.containsKey(playerID);
 	}
 
 	public void progressPlayer(int playerID)
 	{
-		TrackPlayer trackPlayer = this.trackPlayers.get(playerID);
+		TrackPlayer trackPlayer = trackPlayers.get(playerID);
 		if (!trackPlayer.playNextTick())
-			this.stopPlayer(playerID);
+			stopPlayer(playerID);
 	}
 
 	private void stopPlayer(int playerID)
 	{
-		TrackPlayer trackPlayer = this.trackPlayers.get(playerID);
-		this.scheduler.cancelTask(trackPlayer.getTimerID());
-		this.trackPlayers.remove(playerID);
-		this.moosic.trackStop(playerID);
+		TrackPlayer trackPlayer = trackPlayers.get(playerID);
+		scheduler.cancelTask(trackPlayer.getTimerID());
+		trackPlayers.remove(playerID);
+		moosic.trackStop(playerID);
 	}
 
 	private final IScheduler scheduler;
