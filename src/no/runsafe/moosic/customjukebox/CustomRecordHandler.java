@@ -1,5 +1,6 @@
 package no.runsafe.moosic.customjukebox;
 
+import com.google.common.collect.Lists;
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.block.IBlock;
@@ -130,7 +131,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 
 	public void onTrackPlayerStopped(int trackPlayerID)
 	{
-		for (CustomJukebox jukebox : jukeboxes)
+		for (CustomJukebox jukebox : Lists.newArrayList(jukeboxes))
 		{
 			if (jukebox.getPlayerID() == trackPlayerID)
 			{
