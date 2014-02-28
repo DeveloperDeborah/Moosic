@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.block.IBlock;
+import no.runsafe.framework.api.block.IJukebox;
 import no.runsafe.framework.api.event.block.IBlockBreakEvent;
 import no.runsafe.framework.api.event.player.IPlayerRightClickBlock;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
@@ -40,7 +41,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 	public boolean OnPlayerRightClick(IPlayer player, RunsafeMeta usingItem, IBlock targetBlock)
 	{
 		ILocation blockLocation = targetBlock.getLocation();
-		if (targetBlock.is(Item.Decoration.Jukebox))
+		if (targetBlock instanceof IJukebox)
 		{
 			CustomJukebox jukebox = getJukeboxAtLocation(blockLocation);
 			if (jukebox != null)
@@ -56,6 +57,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 					{
 						if (this.isCustomRecord(usingItem))
 						{
+							((IJukebox) targetBlock).eject();
 							player.removeExactItem(usingItem, 1);
 							jukebox = playJukebox(player, new CustomJukebox(blockLocation, usingItem));
 							repository.storeJukebox(blockLocation, usingItem);
