@@ -1,7 +1,7 @@
 package no.runsafe.moosic.commands;
 
+import no.runsafe.framework.api.command.argument.DecimalNumber;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
@@ -16,7 +16,7 @@ public class PlaySong extends PlayerCommand
 	{
 		super(
 			"playsong", "Plays a song at your location.", "runsafe.moosic.play",
-				new RequiredArgument("volume"),
+				new DecimalNumber("volume").withDefault(1.0F).require(),
 				new TrailingArgument("song").require()
 		);
 		this.musicHandler = musicHandler;
@@ -36,7 +36,7 @@ public class PlaySong extends PlayerCommand
 			int id = this.musicHandler.startSong(
 				new MusicTrack(song),
 				executor.getLocation(),
-				Float.valueOf(parameters.get("volume"))
+				(Float) parameters.getValue("volume")
 			);
 			return "&2Playing song with player ID: " + id;
 		}
