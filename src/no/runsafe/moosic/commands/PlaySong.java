@@ -16,8 +16,8 @@ public class PlaySong extends PlayerCommand
 	{
 		super(
 			"playsong", "Plays a song at your location.", "runsafe.moosic.play",
-				new DecimalNumber("volume").withDefault(1.0F).require(),
-				new TrailingArgument("song").require()
+			new DecimalNumber("volume").withDefault(1.0F).require(),
+			new TrailingArgument("song").require()
 		);
 		this.musicHandler = musicHandler;
 
