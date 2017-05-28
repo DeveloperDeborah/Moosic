@@ -92,7 +92,9 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 
 	private boolean isCustomRecord(RunsafeItemStack item)
 	{
-		return item instanceof RunsafeMeta && ((RunsafeMeta) item).getDisplayName().equalsIgnoreCase(customRecordName);
+		return item instanceof RunsafeMeta
+			&& customRecordName.equalsIgnoreCase(((RunsafeMeta) item).getDisplayName())
+			&& ((RunsafeMeta) item).hasLore();
 	}
 
 	public CustomJukebox getJukeboxAtLocation(ILocation location)
