@@ -26,7 +26,7 @@ public class PlaySong extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		File song = this.musicHandler.loadSongFile(parameters.get("song"));
+		File song = this.musicHandler.loadSongFile((String) parameters.getValue("song"));
 
 		if (!song.exists())
 			return "&cThat song does not exist.";
