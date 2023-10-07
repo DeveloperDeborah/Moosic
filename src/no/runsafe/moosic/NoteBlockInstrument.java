@@ -26,5 +26,12 @@ public class NoteBlockInstrument
 		sounds.add(Sound.Note.BassDrum);
 		sounds.add(Sound.Note.Snare);
 		sounds.add(Sound.Note.Sticks);
+		sounds.add(Sound.Note.Chime);
+		sounds.add(Sound.Note.Flute);
+		sounds.add(Sound.Note.Xylophone);
+		sounds.add(Sound.Note.Bass);
+		sounds.add(Sound.Note.Bell);
+		sounds.add(Sound.Note.Guitar);
+		sounds.add(Sound.Note.Pling);
 	}
 }
