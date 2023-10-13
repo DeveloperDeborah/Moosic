@@ -20,7 +20,20 @@ public class MusicTrack
 		ByteBuffer buffer = ByteBuffer.wrap(bytes.toByteArray());
 		buffer.order(ByteOrder.LITTLE_ENDIAN);
 
-		this.length = buffer.getShort(); // Song length
+		this.length = buffer.getShort(); // Song length. 0 if new format
+		if (this.length != 0)
+			versionNum = 0;
+		else
+			versionNum = buffer.get(); // NBS version
+
+		if (versionNum > 0) // Handle new format
+		{
+			buffer.get(); // Vanilla instrument count
+
+			if (versionNum >= 3)
+				this.length = buffer.get();
+		}
+
 		buffer.getShort(); // Layers
 		this.songName = readString(buffer);
 
@@ -38,6 +51,13 @@ public class MusicTrack
 		buffer.getInt(); // Blocks added
 		buffer.getInt(); // Blocks removed
 		readString(buffer); // Midi/Schematic
+
+		if (versionNum >= 4)
+		{
+			buffer.get(); // Loop on/off
+			buffer.get(); // Max loop count
+			buffer.getShort(); // Loop start tick
+		}
 
 		short tick = -1;
 		short jumps;
@@ -59,10 +79,20 @@ public class MusicTrack
 				byte inst = buffer.get();
 				byte key = buffer.get();
 
+				byte volume = 100;
+				short pitch = 0;
+
+				if(versionNum >= 4)
+				{
+					volume = buffer.get();
+					buffer.get(); // stereo, from 0 - 200
+					pitch = buffer.getShort();
+				}
+
 				if (!this.notes.containsKey(tick))
 					this.notes.put(tick, new ArrayList<NoteBlockSound>());
 
-				this.notes.get(tick).add(new NoteBlockSound(new NoteBlockInstrument(inst), key));
+				this.notes.get(tick).add(new NoteBlockSound(new NoteBlockInstrument(inst), key, volume, pitch));
 			}
 		}
 	}
@@ -101,6 +131,7 @@ public class MusicTrack
 		return new ArrayList<NoteBlockSound>();
 	}
 
+	private final int versionNum;
 	private String songName;
 	private int tempo;
 	private short length;
