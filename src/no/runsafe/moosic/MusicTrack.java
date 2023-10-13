@@ -21,17 +21,17 @@ public class MusicTrack
 		buffer.order(ByteOrder.LITTLE_ENDIAN);
 
 		this.length = buffer.getShort(); // Song length. 0 if new format
-		if (this.length != 0)
-			versionNum = 0;
-		else
-			versionNum = buffer.get(); // NBS version
 
-		if (versionNum > 0) // Handle new format
+		int versionNum = 0;
+		if (this.length == 0)
 		{
+			versionNum = buffer.get(); // NBS version
 			buffer.get(); // Vanilla instrument count
 
 			if (versionNum >= 3)
 				this.length = buffer.get();
+			else
+				this.length = 200; // set arbitrary value to get it to work for versions 1-2
 		}
 
 		buffer.getShort(); // Layers
@@ -131,7 +131,6 @@ public class MusicTrack
 		return new ArrayList<NoteBlockSound>();
 	}
 
-	private final int versionNum;
 	private String songName;
 	private int tempo;
 	private short length;
