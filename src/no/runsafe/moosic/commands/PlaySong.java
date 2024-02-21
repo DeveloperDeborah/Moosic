@@ -5,6 +5,7 @@ import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
+import no.runsafe.framework.internal.log.Console;
 import no.runsafe.moosic.MusicHandler;
 import no.runsafe.moosic.MusicTrack;
 
@@ -26,8 +27,10 @@ public class PlaySong extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		File song = this.musicHandler.loadSongFile((String) parameters.getValue("song"));
+		String file = parameters.getRequired("song");
+		float volume = parameters.getRequired("volume");
 
+		File song = this.musicHandler.loadSongFile(file);
 		if (!song.exists())
 			return "&cThat song does not exist.";
 
@@ -36,13 +39,13 @@ public class PlaySong extends PlayerCommand
 			int id = this.musicHandler.startSong(
 				new MusicTrack(song),
 				executor.getLocation(),
-				(Float) parameters.getValue("volume")
+				volume
 			);
 			return "&2Playing song with player ID: " + id;
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			Console.Global().logException(e);
 			return "&cThere was an error! Seek admin assistance.";
 		}
 	}

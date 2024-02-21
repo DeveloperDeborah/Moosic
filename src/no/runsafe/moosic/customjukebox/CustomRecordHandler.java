@@ -10,6 +10,7 @@ import no.runsafe.framework.api.event.player.IPlayerRightClickBlock;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
 import no.runsafe.framework.api.player.IPlayer;
+import no.runsafe.framework.internal.log.Console;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.event.block.RunsafeBlockBreakEvent;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
@@ -75,8 +76,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 	public void OnPluginEnabled()
 	{
 		// Restore any active jukeboxes from the DB.
-		for (CustomJukebox jukebox : repository.getJukeboxes())
-			jukeboxes.add(jukebox);
+		jukeboxes.addAll(repository.getJukeboxes());
 	}
 
 	private void stopJukebox(CustomJukebox jukebox)
@@ -119,7 +119,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 			}
 			catch (Exception e)
 			{
-				e.printStackTrace();
+				Console.Global().logException(e);
 			}
 
 			if (musicTrack != null)
@@ -152,7 +152,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 		customRecordName = configuration.getConfigValueAsString("customRecordName");
 	}
 
-	private final List<CustomJukebox> jukeboxes = new ArrayList<CustomJukebox>();
+	private final List<CustomJukebox> jukeboxes = new ArrayList<>();
 	private String customRecordName;
 	private final MusicHandler musicHandler;
 	private final CustomJukeboxRepository repository;

@@ -3,6 +3,7 @@ package no.runsafe.moosic;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +12,7 @@ public class MusicTrack
 {
 	public MusicTrack(File songFile) throws Exception
 	{
-		DataInputStream stream = new DataInputStream(new BufferedInputStream(new FileInputStream(songFile)));
+		DataInputStream stream = new DataInputStream(new BufferedInputStream(Files.newInputStream(songFile.toPath())));
 		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 
 		while (stream.available() > 0)
@@ -90,7 +91,7 @@ public class MusicTrack
 				}
 
 				if (!this.notes.containsKey(tick))
-					this.notes.put(tick, new ArrayList<NoteBlockSound>());
+					this.notes.put(tick, new ArrayList<>());
 
 				this.notes.get(tick).add(new NoteBlockSound(new NoteBlockInstrument(inst), key, volume, pitch));
 			}
@@ -128,11 +129,11 @@ public class MusicTrack
 		if (this.notes.containsKey(tick))
 			return this.notes.get(tick);
 
-		return new ArrayList<NoteBlockSound>();
+		return new ArrayList<>();
 	}
 
-	private String songName;
-	private int tempo;
+	private final String songName;
+	private final int tempo;
 	private short length;
-	private final HashMap<Short, List<NoteBlockSound>> notes = new HashMap<Short, List<NoteBlockSound>>();
+	private final HashMap<Short, List<NoteBlockSound>> notes = new HashMap<>();
 }

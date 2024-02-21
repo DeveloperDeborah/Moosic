@@ -31,7 +31,7 @@ public class CustomJukebox
 	public String getSongName()
 	{
 		List<String> lore = item.getLore();
-		if (lore.size() > 0)
+		if (lore != null && !lore.isEmpty())
 			return lore.get(0);
 		return "";
 	}

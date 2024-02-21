@@ -35,7 +35,7 @@ public class SongAPI extends Library
 		@Override
 		public List<Object> run(FunctionParameters parameters)
 		{
-			List<Object> returnValues = new ArrayList<Object>();
+			List<Object> returnValues = new ArrayList<>();
 			ILocation location = parameters.getLocation(0);
 
 			File songFile = musicHandler.loadSongFile(parameters.getString(4));

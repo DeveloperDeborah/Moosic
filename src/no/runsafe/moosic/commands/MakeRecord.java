@@ -24,7 +24,7 @@ public class MakeRecord extends PlayerCommand implements IConfigurationChanged
 	{
 		RunsafeMeta item = Item.Special.Crafted.EnchantedBook.getItem();
 		item.setAmount(1);
-		item.addLore((String) parameters.getValue("song")).setDisplayName(customRecordName);
+		item.addLore(parameters.getValue("song")).setDisplayName(customRecordName);
 		executor.getInventory().addItems(item);
 		return "&2Success!";
 	}

@@ -18,7 +18,7 @@ public class NoteBlockInstrument
 	}
 
 	private final int soundID;
-	private static final List<Sound> sounds = new ArrayList<Sound>();
+	private static final List<Sound> sounds = new ArrayList<>();
 	static
 	{
 		sounds.add(Sound.Note.Piano);

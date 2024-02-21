@@ -34,14 +34,7 @@ public class MusicHandler
 		double tickDelay = 1.0 / (double) musicTrack.getTempo();
 		tickDelay = tickDelay * 20D;
 		long delay = (long) tickDelay;
-		int timer = scheduler.startSyncRepeatingTask(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				progressPlayer(newID);
-			}
-		}, delay, delay);
+		int timer = scheduler.startSyncRepeatingTask(() -> progressPlayer(newID), delay, delay);
 
 		trackPlayer.setTimerID(timer);
 		trackPlayers.put(newID, trackPlayer);
@@ -81,7 +74,7 @@ public class MusicHandler
 	}
 
 	private final IScheduler scheduler;
-	private final HashMap<Integer, TrackPlayer> trackPlayers = new HashMap<Integer, TrackPlayer>();
+	private final HashMap<Integer, TrackPlayer> trackPlayers = new HashMap<>();
 	private int currentTrackPlayerID = 0;
 	private final String path;
 	private final Moosic moosic;

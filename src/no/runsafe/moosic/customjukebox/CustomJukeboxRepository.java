@@ -8,6 +8,7 @@ import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventoryType;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class CustomJukeboxRepository extends Repository
 		this.server = server;
 	}
 
+	@Nonnull
 	@Override
 	public String getTableName()
 	{
@@ -57,7 +59,7 @@ public class CustomJukeboxRepository extends Repository
 
 	public List<CustomJukebox> getJukeboxes()
 	{
-		List<CustomJukebox> jukeboxes = new ArrayList<CustomJukebox>();
+		List<CustomJukebox> jukeboxes = new ArrayList<>();
 		for (IRow node : this.database.query("SELECT world, x, y, z, item FROM moosic_jukeboxes"))
 		{
 			ILocation location = node.Location();
@@ -77,6 +79,7 @@ public class CustomJukeboxRepository extends Repository
 		return jukeboxes;
 	}
 
+	@Nonnull
 	@Override
 	public ISchemaUpdate getSchemaUpdateQueries()
 	{
