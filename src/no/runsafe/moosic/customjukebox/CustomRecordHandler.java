@@ -56,7 +56,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 			return true;
 
 		((IJukebox) targetBlock).eject();
-		((IJukebox) targetBlock).setPlaying(null);
+		((IJukebox) targetBlock).setPlaying(usingItem.getItemType());
 		player.removeExactItem(usingItem, 1);
 		jukebox = playJukebox(player, new CustomJukebox(blockLocation, usingItem));
 		repository.storeJukebox(blockLocation, usingItem);
