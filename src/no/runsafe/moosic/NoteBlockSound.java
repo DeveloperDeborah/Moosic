@@ -4,7 +4,7 @@ import no.runsafe.framework.api.ILocation;
 
 public class NoteBlockSound
 {
-	public NoteBlockSound(NoteBlockInstrument instrument, byte key, byte volume, short pitch)
+	public NoteBlockSound(NoteBlockInstrument instrument, byte key, byte volume, float pitch)
 	{
 		this.instrument = instrument;
 		this.key = key;
@@ -23,5 +23,5 @@ public class NoteBlockSound
 	private final NoteBlockInstrument instrument;
 	private final byte key;
 	private final byte volume;
-	private final short pitch;
+	private final float pitch;
 }
