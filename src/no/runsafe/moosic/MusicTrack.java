@@ -80,6 +80,9 @@ public class MusicTrack
 				byte inst = buffer.get();
 				byte key = buffer.get();
 
+				if (inst >= 16)
+					Moosic.Debugger.debugFine("Invalid instrument number:" + inst);
+
 				byte volume = 100;
 				short pitch = 0;
 

@@ -1,6 +1,7 @@
 package no.runsafe.moosic;
 
 import no.runsafe.framework.RunsafeConfigurablePlugin;
+import no.runsafe.framework.api.log.IDebug;
 import no.runsafe.framework.features.Commands;
 import no.runsafe.framework.features.Database;
 import no.runsafe.framework.features.Events;
@@ -12,9 +13,13 @@ import no.runsafe.moosic.customjukebox.CustomRecordHandler;
 
 public class Moosic extends RunsafeConfigurablePlugin
 {
+	public static IDebug Debugger = null;
+
 	@Override
 	protected void pluginSetup()
 	{
+		Debugger = getComponent(IDebug.class);
+
 		addComponent(Events.class);
 		addComponent(Commands.class);
 		addComponent(Database.class);
