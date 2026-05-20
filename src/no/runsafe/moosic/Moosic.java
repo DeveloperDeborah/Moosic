@@ -23,6 +23,7 @@ public class Moosic extends RunsafeConfigurablePlugin
 		addComponent(Events.class);
 		addComponent(Commands.class);
 		addComponent(Database.class);
+		addComponent(Config.class);
 
 		// Repositories
 		addComponent(CustomJukeboxRepository.class);

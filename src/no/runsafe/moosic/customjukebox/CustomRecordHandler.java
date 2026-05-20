@@ -1,13 +1,11 @@
 package no.runsafe.moosic.customjukebox;
 
 import com.google.common.collect.Lists;
-import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.block.IJukebox;
 import no.runsafe.framework.api.event.block.IBlockBreakEvent;
 import no.runsafe.framework.api.event.player.IPlayerRightClickBlock;
-import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.internal.log.Console;
@@ -15,6 +13,7 @@ import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.event.block.RunsafeBlockBreakEvent;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.moosic.Config;
 import no.runsafe.moosic.MusicHandler;
 import no.runsafe.moosic.MusicTrack;
 
@@ -22,7 +21,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightClickBlock, IBlockBreakEvent, IPluginEnabled
+public class CustomRecordHandler implements IPlayerRightClickBlock, IBlockBreakEvent, IPluginEnabled
 {
 	public CustomRecordHandler(MusicHandler musicHandler, CustomJukeboxRepository repository)
 	{
@@ -85,7 +84,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 	private boolean isCustomRecord(RunsafeItemStack item)
 	{
 		return item instanceof RunsafeMeta
-			&& customRecordName.equalsIgnoreCase(((RunsafeMeta) item).getDisplayName())
+			&& Config.getCustomRecordName().equalsIgnoreCase(((RunsafeMeta) item).getDisplayName())
 			&& ((RunsafeMeta) item).hasLore();
 	}
 
@@ -120,7 +119,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 		else
 		{
 			// Corrupt record or invalid file.
-			player.sendColouredMessage("&cThe record cracks and scratches as you put it in the jukebox.");
+			player.sendColouredMessage(Config.Message.getMusicRejected());
 		}
 		return jukebox;
 	}
@@ -138,14 +137,7 @@ public class CustomRecordHandler implements IConfigurationChanged, IPlayerRightC
 		}
 	}
 
-	@Override
-	public void OnConfigurationChanged(IConfiguration configuration)
-	{
-		customRecordName = configuration.getConfigValueAsString("customRecordName");
-	}
-
 	private final List<CustomJukebox> jukeboxes = new ArrayList<>();
-	private String customRecordName;
 	private final MusicHandler musicHandler;
 	private final CustomJukeboxRepository repository;
 }

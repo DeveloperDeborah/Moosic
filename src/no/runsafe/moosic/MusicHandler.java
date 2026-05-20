@@ -42,7 +42,7 @@ public class MusicHandler
 
 		// notify players
 		for (IPlayer player : location.getPlayersInRange(60))
-			player.sendTitle("", String.format("&2Now playing: %s", musicTrack.getSongName()));
+			player.sendTitle("", String.format(Config.Message.getMusicSubtitle(), musicTrack.getSongName()));
 
 		currentTrackPlayerID = newID;
 		return currentTrackPlayerID;
