@@ -30,7 +30,7 @@ public class MusicTrack
 			buffer.get(); // Vanilla instrument count
 
 			if (versionNum >= 3)
-				this.length = buffer.get();
+				this.length = buffer.getShort();
 			else
 				this.length = 200; // set arbitrary value to get it to work for versions 1-2
 		}
