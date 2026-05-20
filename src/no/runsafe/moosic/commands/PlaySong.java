@@ -37,7 +37,7 @@ public class PlaySong extends PlayerCommand
 		try
 		{
 			int id = this.musicHandler.startSong(
-				new MusicTrack(song),
+				new MusicTrack(song, file),
 				executor.getLocation(),
 				volume
 			);

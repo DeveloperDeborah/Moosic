@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MusicTrack
 {
-	public MusicTrack(File songFile) throws Exception
+	public MusicTrack(File songFile, String fileName) throws Exception
 	{
 		DataInputStream stream = new DataInputStream(new BufferedInputStream(Files.newInputStream(songFile.toPath())));
 		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -36,7 +36,12 @@ public class MusicTrack
 		}
 
 		buffer.getShort(); // Layers
-		this.songName = readString(buffer);
+
+		String songTitle = readString(buffer);
+		if (songTitle.isEmpty())
+			this.songName = fileName;
+		else
+			this.songName = songTitle;
 
 		// We pull this data but have no need for it.
 		readString(buffer); // Song author

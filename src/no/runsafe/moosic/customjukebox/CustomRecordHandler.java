@@ -106,7 +106,7 @@ public class CustomRecordHandler implements IPlayerRightClickBlock, IBlockBreakE
 			MusicTrack musicTrack = null;
 			try
 			{
-				musicTrack = new MusicTrack(musicFile);
+				musicTrack = new MusicTrack(musicFile, jukebox.getSongName());
 			}
 			catch (Exception e)
 			{
