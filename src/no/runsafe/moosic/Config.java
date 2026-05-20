@@ -10,8 +10,8 @@ public class Config implements IConfigurationChanged
 	{
 		customRecordName = config.getConfigValueAsString("customRecordName");
 
-		Message.musicSubtitle = config.getConfigValueAsString("message.");
-		Message.musicRejected = config.getConfigValueAsString("message.");
+		Message.musicSubtitle = config.getConfigValueAsString("message.musicSubtitle");
+		Message.musicRejected = config.getConfigValueAsString("message.musicRejected");
 	}
 
 	public static final class Message
