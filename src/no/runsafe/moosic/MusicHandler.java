@@ -3,6 +3,7 @@ package no.runsafe.moosic;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.api.log.IConsole;
+import no.runsafe.framework.api.player.IPlayer;
 
 import java.io.File;
 import java.util.HashMap;
@@ -38,6 +39,10 @@ public class MusicHandler
 
 		trackPlayer.setTimerID(timer);
 		trackPlayers.put(newID, trackPlayer);
+
+		// notify players
+		for (IPlayer player : location.getPlayersInRange(60))
+			player.sendTitle("", String.format(Config.Message.getMusicSubtitle(), musicTrack.getSongName()));
 
 		currentTrackPlayerID = newID;
 		return currentTrackPlayerID;
