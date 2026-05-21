@@ -19,6 +19,13 @@ public class NoteBlockSound
 		//apply pitch shift
 		pitch *= this.pitch;
 
+		// check if pitch is out of range, bring it in range
+		// 0.6 = one octave of separation
+		if (pitch < 0)
+			pitch = pitch + 0.6F;
+		else if (pitch > 2)
+			pitch = pitch - 0.6F;
+
 		location.getWorld().playSound(location, this.instrument.getSound(), (volume * this.volume) / 100, pitch);
 	}
 
