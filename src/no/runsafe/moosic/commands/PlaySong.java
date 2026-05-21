@@ -30,14 +30,14 @@ public class PlaySong extends PlayerCommand
 		String file = parameters.getRequired("song");
 		float volume = parameters.getRequired("volume");
 
-		File song = this.musicHandler.loadSongFile(file);
+		File song = this.musicHandler.loadSongFile(file + ".nbs");
 		if (!song.exists())
 			return "&cThat song does not exist.";
 
 		try
 		{
 			int id = this.musicHandler.startSong(
-				new MusicTrack(song),
+				new MusicTrack(song, file),
 				executor.getLocation(),
 				volume
 			);

@@ -44,7 +44,7 @@ public class SongAPI extends Library
 
 			try
 			{
-				returnValues.add(musicHandler.startSong(new MusicTrack(songFile), location, parameters.getFloat(5)));
+				returnValues.add(musicHandler.startSong(new MusicTrack(songFile, parameters.getString(4)), location, parameters.getFloat(5)));
 			}
 			catch (Exception e)
 			{

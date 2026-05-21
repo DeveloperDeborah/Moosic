@@ -1,1 +1,4 @@
 customRecordName: 'Mysterious Chord Book'
+message:
+  musicSubtitle: '&2Now playing:&r%s'
+  musicRejected: '&cThe record cracks and scratches as you put it in the jukebox.'

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MusicTrack
 {
-	public MusicTrack(File songFile) throws Exception
+	public MusicTrack(File songFile, String fileName) throws Exception
 	{
 		DataInputStream stream = new DataInputStream(new BufferedInputStream(Files.newInputStream(songFile.toPath())));
 		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -30,13 +30,18 @@ public class MusicTrack
 			buffer.get(); // Vanilla instrument count
 
 			if (versionNum >= 3)
-				this.length = buffer.get();
+				this.length = buffer.getShort();
 			else
 				this.length = 200; // set arbitrary value to get it to work for versions 1-2
 		}
 
 		buffer.getShort(); // Layers
-		this.songName = readString(buffer);
+
+		String songTitle = readString(buffer);
+		if (songTitle.isEmpty())
+			this.songName = fileName;
+		else
+			this.songName = songTitle;
 
 		// We pull this data but have no need for it.
 		readString(buffer); // Song author
@@ -80,14 +85,23 @@ public class MusicTrack
 				byte inst = buffer.get();
 				byte key = buffer.get();
 
+				if (inst >= 16)
+				{
+					Moosic.Debugger.debugFine("Invalid instrument number:" + inst);
+					inst = 16;
+				}
+
 				byte volume = 100;
-				short pitch = 0;
+				float pitch = 0;
 
 				if(versionNum >= 4)
 				{
 					volume = buffer.get();
 					buffer.get(); // stereo, from 0 - 200
-					pitch = buffer.getShort();
+
+					// pitch: from -32,768 to 32,767 cents, nbs limits it to -1200 and +1200
+					// minecraft pitch: -1 to 2, 1 is neutral, 1.05 is a half step (100 cents) up
+					pitch = 1 + ((float) buffer.getShort() / 2000);
 				}
 
 				if (!this.notes.containsKey(tick))

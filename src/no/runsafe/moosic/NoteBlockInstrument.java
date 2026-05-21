@@ -37,5 +37,6 @@ public class NoteBlockInstrument
 		sounds.add(Sound.Note.Bit);
 		sounds.add(Sound.Note.Banjo);
 		sounds.add(Sound.Note.Pling);
+		sounds.add(Sound.Creature.Villager.Idle);
 	}
 }
