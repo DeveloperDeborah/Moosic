@@ -92,7 +92,7 @@ public class MusicTrack
 				}
 
 				byte volume = 100;
-				float pitch = 0;
+				float pitch = 1;
 
 				if(versionNum >= 4)
 				{

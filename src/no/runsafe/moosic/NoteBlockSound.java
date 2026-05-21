@@ -15,8 +15,10 @@ public class NoteBlockSound
 	public void playAtLocation(ILocation location, float volume)
 	{
 		float pitch = (float) Math.pow(2.0, ((double) (key - 33) - 12.0) / 12.0);
-		if (this.pitch != 0)
-			pitch *= this.pitch;
+
+		//apply pitch shift
+		pitch *= this.pitch;
+
 		location.getWorld().playSound(location, this.instrument.getSound(), (volume * this.volume) / 100, pitch);
 	}
 
