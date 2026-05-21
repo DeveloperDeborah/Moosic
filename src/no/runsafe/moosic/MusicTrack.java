@@ -100,7 +100,7 @@ public class MusicTrack
 					buffer.get(); // stereo, from 0 - 200
 
 					// pitch: from -32,768 to 32,767 cents, nbs limits it to -1200 and +1200
-					// minecraft pitch: -1 to 2, 1 is neutral, 1.05 is a half step (100 cents) up
+					// minecraft pitch: -1 to 2, 1 is neutral, 1.0833 is a half step (100 cents) up
 					pitch = 1 + ((float) buffer.getShort() / 2000);
 				}
 
